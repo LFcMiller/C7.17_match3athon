@@ -7,11 +7,12 @@ function GameManager(){
     this.tileHandler = new TileHandler();
 
     this.init = function(){
-        this.createBoard();
+        this.tileHandler.init();
     };
 
     this.startGame = function(){
         this.data.reset();
+        this.tileHandler.createGameBoard(this.data.boardWidth,this.data.boardHeight);
     };
 
     //should make these properties private 

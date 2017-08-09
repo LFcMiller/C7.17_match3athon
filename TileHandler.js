@@ -1,17 +1,31 @@
 function TileHandler(){
 
-    gm.eventManager.add_listener("tradePosition", tradePosition);
+    this.init = function(){
+        gm.eventManager.add_listener("tradePosition", this.tradePosition);
+    };
 
-    this.createTile = function(){
+    this.createTile = function(x,y){
+        var tile = new Tile(x,y);
+        tile.type = tileTypes[Math.floor(Math.random()*tileTypes.length)];
+        var image = $("<img>").attr("src", tile.type).addClass("tile");
+        allTiles.push(tile);
+        var containerDiv = $("<div>").addClass("position").attr({"xValue": x, "yValue": y});
+        containerDiv.append(image);
+        $("#gameWindow").append(containerDiv);
+    };
 
-    }
-    this.createBoard = function(){
-
-    }
+    this.createGameBoard = function(width,height) {
+        $("#gameWindow").html("");
+        for(var i = 0; i < width; i++) {
+            for(var j = 0; j < height; j++) {
+                this.createTile(i,j);
+            }
+        }
+    };
 
     this.dropTile = function(tile){
-        
-    }
+
+    };
 
     this.tradePosition = function(tile1,tile2){
         var tempX = tile1.x;
@@ -20,7 +34,7 @@ function TileHandler(){
         tile1.y = tile2.y;
         tile2.x = tempX;
         tile2.y = tempY;
-    }
+    };
 
     this.isMatch = function(tile1,tile2){
         for(var m in tile1.matchesWith) {
@@ -31,7 +45,7 @@ function TileHandler(){
             }
         }
         return false;
-    }
+    };
 
     //parameter could be tile or position
     this.deleteTile = function(){
