@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+
+}
+.desktop {
+    width: 100vw;
+    height: 94vh;
+    box-sizing: border-box;
+    position: relative;
+    background-image: url("http://i.imgur.com/lojmr.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#gameArea {
+    width: 45vw;
+    height: 85vh;
+    z-index: 10;
+    background-color: pink;
+    position: absolute;
+}
+.bottomBar {
+    height: 6vh;
+    width: 100vw;
+    box-sizing: border-box;
+    background-color: gray;
+}
