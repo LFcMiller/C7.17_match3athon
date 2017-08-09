@@ -17,7 +17,7 @@ function GameData(){
     }
 
     this.reset = function(){
-        this.score = 0;
+        //this.score = 0;
     };
 
     this.score = null; //current score
