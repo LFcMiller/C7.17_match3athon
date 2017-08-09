@@ -4,22 +4,26 @@ function TileHandler(){
         gm.eventManager.add_listener("tradePosition", this.tradePosition);
     };
 
-    this.createTile = function(x,y){
-        var tile = new Tile(x,y);
+
+    this.createTile = function(pos){
+        var tile = new Tile(pos);
         tile.type = tileTypes[Math.floor(Math.random()*tileTypes.length)];
+        tile.matchesWith.push(tile.type);
         var image = $("<img>").attr("src", tile.type).addClass("tile");
-        allTiles.push(tile);
-        var containerDiv = $("<div>").addClass("position").attr({"xValue": x, "yValue": y});
+        tile.dom = image;
+        gm.data.allTiles.push(tile);
+        var containerDiv = $("<div>").addClass("position").attr({"xValue": pos.x, "yValue": pos.y});
+        gm.data.allTileContainers.push(containerDiv);
+        tile.container = containerDiv;
         containerDiv.append(image);
         $("#gameWindow").append(containerDiv);
     };
-
 
     this.createGameBoard = function(width,height) {
         $("#gameWindow").html("");
         for(var i = 0; i < width; i++) {
             for(var j = 0; j < height; j++) {
-                this.createTile(i,j);
+                this.createTile(new Position(i,j));
             }
         }
     };
@@ -29,14 +33,18 @@ function TileHandler(){
     };
 
     this.tradePosition = function(tile1,tile2){
-        var tempX = tile1.x;
-        var tempY = tile1.y;
-        tile1.x = tile2.x;
-        tile1.y = tile2.y;
-        tile2.x = tempX;
-        tile2.y = tempY;
+        var tempPos = tile1.targetPosition;
+        tile1.targetPosition = tile2.targetPosition;
+        tile2.targetPosition = tempPos;
+        this.moveTile(tile1);
+        this.moveTile(tile2);
     };
 
+    this.moveTile = function(tile){
+        var targetContainer = gm.data.getTileContainerByPosition(tile.targetPosition);
+        tile.container = targetContainer;
+        $(targetContainer).append(tile.dom);
+    }
 
     this.isMatch = function(tile1,tile2){
         for(var m in tile1.matchesWith) {
