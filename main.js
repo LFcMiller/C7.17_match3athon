@@ -6,10 +6,8 @@ var gm = null;
 function createGameBoard () {
     for(var i = 0; i < 9; i++) {
         for(var j = 0; j < 9; j++) {
-            var tile = new Tile();
-            tile.x = i;
-            tile.y = j;
-            tile.type = tileTypes[Math.floor(Math.random()*tileTypes.length)]
+            var tile = new Tile(i,j);
+            tile.type = tileTypes[Math.floor(Math.random()*tileTypes.length)];
             var image = $("<img>").attr("src", tile.type).addClass("icon");
             var containerDiv = $("<div>").addClass("tile");
             containerDiv.append(image);
