@@ -1,12 +1,25 @@
 function TileHandler(){
-    
-    gm.eventManager.add_listener("tradePosition", tradePosition);
 
-    this.createTile = function(){
-
+    this.init = function(){
+        gm.eventManager.add_listener("tradePosition", this.tradePosition);
     }
-    this.createBoard = function(){
 
+
+    this.createTile = function(x,y){
+        var tile = new Tile(x,y);
+        tile.type = gm.data.tileTypes[Math.floor(Math.random()*gm.data.tileTypes.length)];
+        var image = $("<img>").attr("src", tile.type).addClass("icon");
+        var containerDiv = $("<div>").addClass("tile");
+        containerDiv.append(image);
+        $("#gameWindow").append(containerDiv);
+    }
+
+    this.createGameBoard = function(width,height) {
+        for(var i = 0; i < width; i++) {
+            for(var j = 0; j < height; j++) {
+                this.createTile(i,j);
+            }
+        }
     }
 
     this.dropTile = function(tile){

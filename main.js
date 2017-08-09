@@ -1,4 +1,5 @@
-document.ready(init);
+$(document).ready(init);
+
 
 var allTiles = [];
 var gm = null;
@@ -6,11 +7,14 @@ var gm = null;
 
 function init(){
     //TODO make all tiles, put all buttons into allTiles
-    setButtonEvent(allTiles);
     gm = new GameManager();
     gm.init();
     gm.startGame();
 
+
+
+    //below is test
+    setButtonEvent(allTiles);
     gm.eventManager.add_listener("onButtonClick",test);
     gm.eventManager.add_listener("onButtonClick",test2);
     
