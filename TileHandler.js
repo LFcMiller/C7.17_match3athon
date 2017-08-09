@@ -14,6 +14,7 @@ function TileHandler(){
         $("#gameWindow").append(containerDiv);
     }
 
+
     this.createGameBoard = function(width,height) {
         for(var i = 0; i < width; i++) {
             for(var j = 0; j < height; j++) {
@@ -34,6 +35,7 @@ function TileHandler(){
         tile2.x = tempX;
         tile2.y = tempY;
     }
+
 
     this.isMatch = function(tile1,tile2){
         for(var m in tile1.matchesWith) {
