@@ -7,11 +7,11 @@ function GameManager(){
 
     this.init = function(){
         this.createBoard();
-    }
+    };
 
     this.startGame = function(){
         this.data.reset();
-    }
+    };
 
     //should make these properties private 
     this.checkTile = function(){}; //check if tile is first or second clicked

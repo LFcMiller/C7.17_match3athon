@@ -1,12 +1,27 @@
-document.ready(init);
+$(document).ready(init);
 
+var tileTypes = ["icons/chrome.png","icons/Css.png","icons/html5.png","icons/IE.png","icons/js.png","icons/php.png","icons/react.png"];
 var allTiles = [];
 var gm = null;
-
+function createGameBoard () {
+    for(var i = 0; i < 9; i++) {
+        for(var j = 0; j < 9; j++) {
+            var tile = new Tile();
+            tile.x = i;
+            tile.y = j;
+            tile.type = tileTypes[Math.floor(Math.random()*tileTypes.length)]
+            var image = $("<img>").attr("src", tile.type).addClass("icon");
+            var containerDiv = $("<div>").addClass("tile");
+            containerDiv.append(image);
+            $("#gameWindow").append(containerDiv);
+        }
+    }
+}
 
 function init(){
     //TODO make all tiles, put all buttons into allTiles
     setButtonEvent(allTiles);
+    createGameBoard();
     gm = new GameManager();
     gm.init();
     gm.startGame();

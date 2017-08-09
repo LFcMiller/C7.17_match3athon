@@ -1,3 +1,6 @@
 $(document).ready(function() {
-    $("#gameArea").draggable({cancel: "#gameWindow"});
+    $("#gameArea").draggable({
+        cancel: "#gameWindow",
+        containment: "window"
+    });
 });

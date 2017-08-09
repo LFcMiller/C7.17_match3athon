@@ -40,6 +40,20 @@ body {
     border: 5px solid #3c3f41;
     border-top: none;
     border-bottom: 20px solid #3c3f41;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+.tile {
+    height: 11%;
+    width: 11%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon {
+    height: 90%;
 }
 .bottomBar {
     height: 6vh;
