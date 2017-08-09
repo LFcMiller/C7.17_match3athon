@@ -16,10 +16,14 @@ var allStates = {
     wait_first_input : {
         nextState : null,
         onEnter : function(){
-            console.log("wait_first_input onEnter");
+            for(var t in gm.data.allTiles){
+                allTiles[t].onClick = function(){
+                    gm.data.firstTile = allTiles[t];
+                }
+            }
         },
         onExit : function(){
-            console.log("wait_first_input onEnter");
+            console.log("wait_first_input onExit");
         },
         onCheck : function(){
             /*if(some condition === true){
@@ -35,7 +39,7 @@ var allStates = {
             console.log("wait_second_input onEnter");
         },
         onExit : function(){
-            console.log("wait_second_input onEnter");
+            console.log("wait_second_input onExit");
         },
         onCheck : function(){
             /*if(some condition === true){
