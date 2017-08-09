@@ -1,4 +1,4 @@
-gitbody {
+body {
     margin: 0;
     overflow: hidden;
 }
@@ -45,14 +45,14 @@ gitbody {
     justify-content: space-around;
     align-content: space-around;
 }
-.tile {
+.position {
     height: 11%;
     width: 11%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.icon {
+.tile {
     height: 90%;
 }
 .bottomBar {
