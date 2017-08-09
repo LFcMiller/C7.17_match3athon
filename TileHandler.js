@@ -1,5 +1,5 @@
 function TileHandler(){
-
+    
     gm.eventManager.add_listener("tradePosition", tradePosition);
 
     this.createTile = function(){
@@ -10,7 +10,7 @@ function TileHandler(){
     }
 
     this.dropTile = function(tile){
-        
+
     }
 
     this.tradePosition = function(tile1,tile2){

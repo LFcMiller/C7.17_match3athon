@@ -3,6 +3,7 @@ function Tile(x,y) {
     this.x = x;
     this.y = y;
 
+    this.matchesWith = [];
 
     this.type = null; //type of tile
     this.matchesWith = null; //what it can match with
