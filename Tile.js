@@ -1,4 +1,9 @@
-function Tile() {
+function Tile(x,y) {
+    
+    this.x = x;
+    this.y = y;
+
+
     this.type = null; //type of tile
     this.matchesWith = null; //what it can match with
     this.match = function(){}; //behavior on match
