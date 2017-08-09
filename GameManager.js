@@ -7,7 +7,8 @@ function GameManager(){
     this.tileHandler = new TileHandler();
 
     this.init = function(){
-        this.createBoard();
+        this.tileHandler.init();
+        this.tileHandler.createGameBoard(this.data.boardWidth,this.data.boardHeight);
     };
 
     this.startGame = function(){
