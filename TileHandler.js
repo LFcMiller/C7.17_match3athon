@@ -23,8 +23,15 @@ function TileHandler(){
         }
     };
 
-    this.dropTile = function(tile){
-
+    this.dropTile = function(){
+        for (var j = gm.data.boardHeight-1; j>0; j--) {
+            for(var i = gm.data.boardWidth-1; i>0; i--) {
+                if(!($("div[xValue="+j+"][yValue="+i+"]").children().length)){
+                    $("div[xValue="+j+"][yValue="+i+"]").append($("div[xValue="+(j-1)+"][yValue="+i+"]").children())
+                    gm.tileHandler.dropTile();
+                }
+            }
+        }
     };
 
     this.tradePosition = function(tile1,tile2){

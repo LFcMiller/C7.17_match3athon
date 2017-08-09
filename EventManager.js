@@ -17,7 +17,7 @@ function EventManager(){
             }
             e.listener.push(callback);
         }
-    }
+    };
 
     this.remove_listener = function(event_name, callback){
         var e = getEventByName(event_name);
@@ -26,20 +26,20 @@ function EventManager(){
                 e.listener.splice(li,1);
             }
         }
-    }
+    };
 
     this.raise = function(event_name, sender, args){
         var e = getEventByName(event_name);
         for(var li in e.listener){
             e.listener[li]();
         }
-    }
+    };
 
     function getEventByName(name){
         for(var e in events)
             if(events[e].name === name) return events[e];
         return null;
-    }
+    };
 
     function Event(name){
         this.name = name;
