@@ -11,7 +11,7 @@ function GameData(){
 
     this.reset = function(){
         this.score = 0;
-    }
+    };
 
     this.size = null; //board size
     this.score = null; //current score
