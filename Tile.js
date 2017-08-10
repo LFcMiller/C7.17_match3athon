@@ -18,6 +18,23 @@ function Tile(pos) {
         }
     };
 
+    this.changeOnStart = function(){
+        var result = false;
+        if(this.pos.y > 0 && this.pos.y < data.boardHeight-1){
+            if(tileHandler.isMatch(tiles[t.pos.y-1][t.pos.x], t)
+                && tileHandler.isMatch(tiles[t.pos.y+1][t.pos.x], t)){
+                result = true;
+            }
+        }
+        if(this.pos.x > 0 && this.pos.x < data.boardWidth-1) {
+            if (tileHandler.isMatch(tiles[t.pos.y][t.pos.x - 1], t)
+                && tileHandler.isMatch(tiles[t.pos.y][t.pos.x + 1], t)) {
+                result = true;
+            }
+        }
+        return result;
+    };
+
     this.checkMatch = function(){
         var tiles = data.allTiles;
         var t = tiles[this.pos.y][this.pos.x];
