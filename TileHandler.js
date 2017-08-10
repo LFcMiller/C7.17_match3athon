@@ -6,7 +6,7 @@ function TileHandler(){
         tile.matchesWith.push(tile.type);
         var image = $("<img>").attr("src", tile.type).addClass("tile");
         tile.dom = image;
-        data.allTiles[pos.y].push(tile);
+        data.allTiles[pos.y][pos.x] = tile;
         var container = data.allTileContainers[pos.y][pos.x];
         tile.container = container;
         tile.dom.appendTo(container);
@@ -34,15 +34,20 @@ function TileHandler(){
         /*
         for(var i = 0; i< height; i++){
             for(var j = 0; j < width; j++) {
-                this.checkForInitialMatch(data.allTiles[i][j], "reset");
+                this.checkForInitialMatch(data.allTiles[j][i], "reset");
             }
         }
         */
     };
 
     this.checkForInitialMatch = function(tile, resetTrigger) {
+
+        var x = tile.pos.x;
+        var y = tile.pos.y;
         if(gm.checkForAllMatch(tile, resetTrigger)){
-            var replaceTile = this.createTile(new Position(tile.pos.y,tile.pos.x));
+            debugger;
+            var replaceTile = this.createTile(new Position(x,y));
+            data.currentMatchedTiles=[];
             this.checkForInitialMatch(replaceTile, resetTrigger);
         }
     };
