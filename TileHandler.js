@@ -31,11 +31,13 @@ function TileHandler(){
                 this.createTile(new Position(j,i));
             }
         }
+        /*
         for(var i = 0; i< height; i++){
             for(var j = 0; j < width; j++) {
                 this.checkForInitialMatch(data.allTiles[j][i], "reset");
             }
         }
+        */
     };
     this.initialCheckLoop = function() {
         var 
@@ -63,22 +65,37 @@ function TileHandler(){
     };
 
     this.tradePosition = function(tile1,tile2){
-        var tempPos = tile1.targetPosition;
-        tile1.targetPosition = tile2.targetPosition;
-        tile2.targetPosition = tempPos;
-        this.moveTile(tile1);
-        this.moveTile(tile2);
+        tiles = data.allTiles;
+            tiles[tile2.pos.y][tile2.pos.x] = tile1;
+            tiles[tile1.pos.y][tile1.pos.x] = tile2;
+            var temp = null;
+            temp = tile1.pos;
+            tile1.pos = tile2.pos;
+            tile2.pos = temp;
+            temp = tile1.container;
+            tile1.container = tile2.container;
+            tile2.container = temp;
+            $(tile1.container).append(tile1.dom);
+            $(tile2.container).append(tile2.dom);
     };
 
-    this.moveTile = function(tile,newPosition){
+    this.moveTile = function(tile,newPos){
+        if(tile === null){
+            return;
+        }
         tiles = data.allTiles;
-        var oldPosition = tile.pos;
-        tiles[newPosition.y][newPosition.x] = tile;
-        tiles[oldPosition.y][oldPosition.x] = null;
-        tile.pos = newPosition;
-        tile.container = data.allTileContainers[newPosition.y][newPosition.x];
-        $(tile.container).append(tile.dom);
+        var oldPos = tile.pos;
+        if(tiles[newPos.y][newPos.x] === null){
+            tiles[newPos.y][newPos.x] = tile;
+            tiles[oldPos.y][oldPos.x] = null;
+            tile.pos = newPos;
+            tile.container = data.allTileContainers[newPos.y][newPos.x];
+            $(tile.container).append(tile.dom);
+        }else{
+            this.tradePosition(tiles[newPos.y][newPos.x], tiles[oldPos.y][oldPos.x]);
+        }
     };
+
 
     this.isMatch = function(tile1,tile2){
         if(tile1 && tile2) {

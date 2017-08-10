@@ -3,9 +3,20 @@ function GameManager(){
     this.startGame = function(){
         data.reset();
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
+        this.checkAllMatch();
+        console.log(data.shouldDeletePosition);
+        //this.Timer();
     };
 
-    //should make these properties private 
+
+    this.checkAllMatch = function(){
+        for(var i = 0; i < data.boardHeight; ++i){
+            for(var j = 0; j< data.boardWidth; ++j){
+                data.allTiles[j][i].checkMatch();
+            }
+        }
+    };
+
     this.checkForAllMatch = function(tile, resetTrigger){ //check for match for all possibilities
         if(tile.pos.y > 1) {
             if(this.checkForMatchNegativeY(tile,resetTrigger)){
@@ -157,4 +168,26 @@ function GameManager(){
     };
     this.switchTiles = function(){}; //Can switch even if no match? If no match, squiggly red line under switched tiles?
     this.shrinkBoard = function(){};
+
+    this.Timer = function(){
+        
+        count();
+
+        function count(){
+            setTimeout(function(){
+            data.timeLeft -= 1;
+            view.updateTime();
+            if(data.timeLeft <=0){
+                gm.onTimeOut();
+                return;
+            }
+            count();
+            console.log(data.timeLeft);
+        },1000);
+        }
+    }
+
+    this.onTimeOut = function(){
+        console.log("time out");
+    }
 }
