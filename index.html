@@ -12,7 +12,6 @@
     <script src="jquery.js"></script>
     <script src="View.js"></script>
     <script src="Tile.js"></script>
-    <script src="ObjectTiles.js"></script>
     <script src="GameData.js"></script>
     <script src="GameManager.js"></script>
     <script src="TileHandler.js"></script>
@@ -31,8 +30,21 @@
         </div>
     </div>
     <div class="bottomBar">
-        <button class="startButton">Start</button>
+        <button class="startButton"><img src="images/windowsLogo.png" alt="" class="windows">Start</button>
+        <div class="scoreContainer">
+            <div class="score">Test</div>
+            <div class="highScore">High Score: <span class="localHighScore"></span></div>
+        </div>
         <div class="timer"><span>1:00</span></div>
+    </div>
+    <div class="modalWinContainer hidden">
+        <div class="modalWin">
+        <img src="images/success.png" alt="" class="win">
+        <div class="winMessage">Way to go! Your code was successful!</div>
+        </div>
+    </div>
+    <div class="modalLose hidden">
+        <img src="images/error.png" alt="" class="lose">
     </div>
 </body>
 </html>

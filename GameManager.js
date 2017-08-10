@@ -87,7 +87,12 @@ function GameManager(){
     };
 
     this.onTimeOut = function(){
-        console.log("time out");
+        view.displayModalLose();
+        if (data.score > localStorage.highScore) {
+            localStorage.highScore = data.score;
+        }
+        $(".localHighScore").text(localStorage.highScore);
+        $(".position").off();
         this.onLose();
     };
 
@@ -97,6 +102,11 @@ function GameManager(){
     };
 
     this.onLose = function(){
-
+        view.displayModalLose();
+        if (data.score > localStorage.highScore) {
+            localStorage.highScore = data.score;
+        }
+        $(".localHighScore").text(localStorage.highScore);
+        $(".position").off();
     };
 }
