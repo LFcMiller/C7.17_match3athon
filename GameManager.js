@@ -9,16 +9,24 @@ function GameManager(){
     //should make these properties private 
     this.checkForAllMatch = function(tile, resetTrigger){ //check for match for all possibilities
         if(tile.pos.y > 1) {
-            this.checkForMatchNegativeY(tile,resetTrigger);
+            if(this.checkForMatchNegativeY(tile,resetTrigger)){
+                return true;
+            }
         }
         if (tile.pos.x > 1) {
-            this.checkForMatchNegativeX(tile, resetTrigger);
+            if(this.checkForMatchNegativeX(tile, resetTrigger)){
+                return true;
+            }
         }
         if (tile.pos.x < 6) {
-            this.checkForMatchPositiveX(tile, resetTrigger);
+            if(this.checkForMatchPositiveX(tile, resetTrigger)){
+                return true;
+            }
         }
         if (tile.pos.y < 6) {
-            this.checkForMatchPositiveY(tile, resetTrigger);
+            if(this.checkForMatchPositiveY(tile, resetTrigger)){
+                return true;
+            }
         }
     }; 
     this.checkForMatchNegativeX = function(tile, resetTrigger){
@@ -36,8 +44,10 @@ function GameManager(){
                             }
                         }
                         gm.handleMatch(data.currentMatchedTiles, resetTrigger);
+                        return true;
                     } else {
                         gm.handleMatch(data.currentMatchedTiles, resetTrigger);
+                        return true;
                     }
                 }
             } else {
@@ -61,8 +71,10 @@ function GameManager(){
                         }
                     }
                     gm.handleMatch(data.currentMatchedTiles, resetTrigger);
+                    return true;
                 } else {
                     gm.handleMatch(data.currentMatchedTiles, resetTrigger);
+                    return true;
                 }
             } else {
                 data.currentMatchedTiles = [];
@@ -85,8 +97,10 @@ function GameManager(){
                         }
                     }
                     gm.handleMatch(data.currentMatchedTiles, resetTrigger);
+                    return true;
                 } else {
                     gm.handleMatch(data.currentMatchedTiles, resetTrigger);
+                    return true;
                 }
             } else {
                 data.currentMatchedTiles = [];
@@ -109,8 +123,10 @@ function GameManager(){
                         }
                     }
                     gm.handleMatch(data.currentMatchedTiles, resetTrigger);
+                    return true;
                 } else {
                     gm.handleMatch(data.currentMatchedTiles, resetTrigger);
+                    return true;
                 }
             } else {
                 data.currentMatchedTiles = [];
@@ -120,7 +136,6 @@ function GameManager(){
     this.handleMatch = function(matchArray, resetTrigger){ //handle match if actual match
         if(resetTrigger){
             tileHandler.deleteTile(matchArray[0].pos);
-            data.currentMatchedTiles = [];
             return true;
         }
         if(matchArray.length = 5) {
