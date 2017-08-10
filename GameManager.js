@@ -26,14 +26,18 @@ function GameManager(){
             data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x-1]);
             if(tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x-1],data.allTiles[tile.pos.y][tile.pos.x-2])) {
                 data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x-2]);
-                if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x+1])) {
-                    data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+1]);
-                    if (tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x+1],data.allTiles[tile.pos.y][tile.pos.x+2])) {
-                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+2]);
+                if(data.allTiles[tile.pos.y][tile.pos.x+1]){
+                    if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x+1])) {
+                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+1]);
+                        if(data.allTiles[tile.pos.y][tile.pos.x+2]) {
+                            if (tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x + 1], data.allTiles[tile.pos.y][tile.pos.x + 2])) {
+                                data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x + 2]);
+                            }
+                        }
+                        data.handleMatch(data.currentMatchedTiles);
+                    } else {
+                        data.handleMatch(data.currentMatchedTiles);
                     }
-                    data.handleMatch(data.currentMatchedTiles);
-                } else {
-                    handleMatch(data.currentMatchedTiles);
                 }
             } else {
                 data.currentMatchedTiles = [];
@@ -46,14 +50,18 @@ function GameManager(){
             data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+1]);
             if(tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x+1],data.allTiles[tile.pos.y][tile.pos.x+2])) {
                 data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+2]);
-                if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x-1])) {
-                    data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x-1]);
-                    if (tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x-1],data.allTiles[tile.pos.y][tile.pos.x-2])) {
-                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x-2]);
+                if(data.allTiles[tile.pos.y][tile.pos.x-1]) {
+                    if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x - 1])) {
+                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x - 1]);
+                        if(data.allTiles[tile.pos.y][tile.pos.x-2]) {
+                            if (tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x - 1], data.allTiles[tile.pos.y][tile.pos.x - 2])) {
+                                data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x - 2]);
+                            }
+                        }
                     }
                     data.handleMatch(data.currentMatchedTiles);
                 } else {
-                    gm.handleMatch(data.currentMatchedTiles);
+                    data.handleMatch(data.currentMatchedTiles);
                 }
             } else {
                 data.currentMatchedTiles = [];
@@ -66,14 +74,18 @@ function GameManager(){
             data.currentMatchedTiles.push(data.allTiles[tile.pos.y-1][tile.pos.x]);
             if(tileHandler.isMatch(data.allTiles[tile.pos.y-1][tile.pos.x],data.allTiles[tile.pos.y-2][tile.pos.x])) {
                 data.currentMatchedTiles.push(data.allTiles[tile.pos.y-2][tile.pos.x]);
-                if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y+1][tile.pos.x])) {
-                    data.currentMatchedTiles.push(data.allTiles[tile.pos.y+1][tile.pos.x]);
-                    if (tileHandler.isMatch(data.allTiles[tile.pos.y+1][tile.pos.x],data.allTiles[tile.pos.y+2][tile.pos.x])) {
-                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y+2][tile.pos.x]);
+                if(data.allTiles[tile.pos.y][tile.pos.y+1]) {
+                    if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y+1][tile.pos.x])) {
+                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y + 1][tile.pos.x]);
+                        if(data.allTiles[tile.pos.y][tile.pos.y+2]) {
+                            if (tileHandler.isMatch(data.allTiles[tile.pos.y + 1][tile.pos.x], data.allTiles[tile.pos.y + 2][tile.pos.x])) {
+                                data.currentMatchedTiles.push(data.allTiles[tile.pos.y + 2][tile.pos.x]);
+                            }
+                        }
                     }
                     data.handleMatch(data.currentMatchedTiles);
                 } else {
-                    gm.handleMatch(data.currentMatchedTiles);
+                    data.handleMatch(data.currentMatchedTiles);
                 }
             } else {
                 data.currentMatchedTiles = [];
@@ -86,14 +98,18 @@ function GameManager(){
             data.currentMatchedTiles.push(data.allTiles[tile.pos.y+1][tile.pos.x]);
             if(tileHandler.isMatch(data.allTiles[tile.pos.y+1][tile.pos.x],data.allTiles[tile.pos.y+2][tile.pos.x])) {
                 data.currentMatchedTiles.push(data.allTiles[tile.pos.y+2][tile.pos.x]);
-                if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y-1][tile.pos.x])) {
-                    data.currentMatchedTiles.push(data.allTiles[tile.pos.y-1][tile.pos.x]);
-                    if (tileHandler.isMatch(data.allTiles[tile.pos.y-1][tile.pos.x],data.allTiles[tile.pos.y-2][tile.pos.x])) {
-                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y-2][tile.pos.x]);
+                if(data.allTiles[tile.pos.y][tile.pos.y-1]) {
+                    if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y-1][tile.pos.x])) {
+                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y - 1][tile.pos.x]);
+                        if(data.allTiles[tile.pos.y][tile.pos.y-2]) {
+                            if (tileHandler.isMatch(data.allTiles[tile.pos.y - 1][tile.pos.x], data.allTiles[tile.pos.y - 2][tile.pos.x])) {
+                                data.currentMatchedTiles.push(data.allTiles[tile.pos.y - 2][tile.pos.x]);
+                            }
+                        }
+                        data.handleMatch(data.currentMatchedTiles);
                     }
-                    data.handleMatch(data.currentMatchedTiles);
                 } else {
-                    gm.handleMatch(data.currentMatchedTiles);
+                    data.handleMatch(data.currentMatchedTiles);
                 }
             } else {
                 data.currentMatchedTiles = [];
