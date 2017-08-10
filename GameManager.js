@@ -8,14 +8,12 @@ function GameManager(){
     var that = this;
 
     this.init = function(){
-        this.eventManager.add_listener("startGame", this.startGame.bind(gm));
         this.tileHandler.init();
     };
 
     this.startGame = function(){
         this.data.reset();
         this.tileHandler.createGameBoard(this.data.boardWidth,this.data.boardHeight);
-        setTileOnClick(this.data.allTiles);
     };
 
     //should make these properties private 
