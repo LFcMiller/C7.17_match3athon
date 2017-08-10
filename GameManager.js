@@ -3,10 +3,20 @@ function GameManager(){
     this.startGame = function(){
         data.reset();
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
-        this.Timer();
+        this.checkAllMatch();
+        console.log(data.shouldDeletePosition);
+        //this.Timer();
     };
 
-    //should make these properties private 
+
+    this.checkAllMatch = function(){
+        for(var i = 0; i < data.boardHeight; ++i){
+            for(var j = 0; j< data.boardWidth; ++j){
+                data.allTiles[j][i].checkMatch();
+            }
+        }
+    };
+
     this.checkForAllMatch = function(tile, resetTrigger){ //check for match for all possibilities
         if(tile.pos.y > 1) {
             this.checkForMatchNegativeY(tile,resetTrigger);
