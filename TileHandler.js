@@ -20,9 +20,7 @@ function TileHandler(){
     };
 
     this.createGameBoard = function(width,height) {
-        $("#gameWindow").html("");
-        data.allTiles = [];
-        data.allTileContainers = [];
+
         for(var i = 0; i < height; i++) {
             data.allTiles.push([]);
             data.allTileContainers.push([]);
@@ -31,13 +29,6 @@ function TileHandler(){
                 this.createTile(new Position(j,i));
             }
         }
-        /*
-        for(var i = 0; i< height; i++){
-            for(var j = 0; j < width; j++) {
-                this.checkForInitialMatch(data.allTiles[j][i], "reset");
-            }
-        }
-        */
     };
 
     this.checkForInitialMatch = function(tile, resetTrigger) {
