@@ -1,8 +1,6 @@
 function GameManager(){
 
     //TODO need default state
-    this.FSM = new FSM(allStates.wait_first_input);
-    this.eventManager = new EventManager();
     this.data = new GameData();
     this.tileHandler = new TileHandler();
     var that = this;
