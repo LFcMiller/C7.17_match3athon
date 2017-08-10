@@ -37,7 +37,7 @@ function TileHandler(){
     };
 
     this.dropTile = function(tile){
-
+        
     };
 
     this.tradePosition = function(tile1,tile2){
