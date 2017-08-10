@@ -21,10 +21,12 @@ function TileHandler(){
         var containerDiv = $("<div>").addClass("position").attr({"xValue": pos.x, "yValue": pos.y});
         gm.data.allTileContainers[pos.y].push(containerDiv);
         $("#gameWindow").append(containerDiv);
-    }
+    };
 
     this.createGameBoard = function(width,height) {
         $("#gameWindow").html("");
+        gm.data.allTiles = [];
+        gm.data.allTileContainers = [];
         for(var i = 0; i < height; i++) {
             gm.data.allTiles.push([]);
             gm.data.allTileContainers.push([]);
@@ -35,7 +37,9 @@ function TileHandler(){
         }
     };
 
+    this.checkForInitialMatch = function() {
 
+    };
 
     this.dropTile = function(){
         for(var i = gm.data.boardHeight-1; i >=0; --i){
