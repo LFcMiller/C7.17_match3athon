@@ -7,7 +7,7 @@ var gm = null;
 function init(){
     gm = new GameManager();
     gm.init();
-    $(".startButton").on("click", gm.startGame);
+    $(".startButton").on("click", gm.startGame.bind(gm));
 }
 
 //tile not finished, each tile store it's button
