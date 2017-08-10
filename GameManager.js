@@ -3,7 +3,7 @@ function GameManager(){
     this.startGame = function(){
         data.reset();
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
-        this.Timer();
+        //this.Timer();
     };
 
     //should make these properties private 
