@@ -43,32 +43,6 @@ function GameManager(){
         return deleted;
     };
 
-    this.handleMatch = function(matchArray, resetTrigger){ //handle match if actual match
-        if(resetTrigger){
-            tileHandler.deleteTile(matchArray[0].pos);
-            return true;
-        }
-        if(matchArray.length = 5) {
-            data.score+=20;
-        } else if(matchArray.length = 4) {
-            data.score+=15;
-        } else {
-            data.score+=10
-        }
-        for(var i = 0; i < matchArray.length; i++) {
-            data.allTiles[matchArray[i].pos.y][matchArray[i].pos.x] = null;
-            $("div[xValue="+(matchArray[i].pos.x)+"][yValue="+(matchArray[i].pos.y)+"]").html("");
-        }
-        tileHandler.dropTile();
-        for (var i = 0; i <matchArray.length; i++){
-            var tile = new Tile(new Position(matchArray[i].pos.x, 0));
-        }
-
-        this.checkForAllMatch();
-    };
-    this.switchTiles = function(){}; //Can switch even if no match? If no match, squiggly red line under switched tiles?
-    this.shrinkBoard = function(){};
-
     this.Timer = function(){
         
         count();
