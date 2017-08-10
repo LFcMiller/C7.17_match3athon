@@ -21,18 +21,18 @@ function TileHandler(){
 
     this.createGameBoard = function(width,height) {
         $("#gameWindow").html("");
-        for(var i = 0; i < width; i++) {
-            for(var j = 0; j < height; j++) {
-                this.createTile(new Position(i,j));
+        for(var i = 0; i < height; i++) {
+            for(var j = 0; j < width; j++) {
+                this.createTile(new Position(j,i));
             }
         }
     };
 
     this.dropTile = function(){
-        for (var j = gm.data.boardHeight-1; j>0; j--) {
-            for(var i = gm.data.boardWidth-1; i>0; i--) {
-                if(!($("div[xValue="+j+"][yValue="+i+"]").children().length)){
-                    $("div[xValue="+j+"][yValue="+i+"]").append($("div[xValue="+(j-1)+"][yValue="+i+"]").children())
+        for (var i = gm.data.boardHeight-1; i>=0; i--) {
+            for(var j = gm.data.boardWidth-1; j>0; j--) {
+                if(!($("div[xValue="+i+"][yValue="+j+"]").children().length)){
+                    $("div[xValue="+i+"][yValue="+j+"]").append($("div[xValue="+i+"][yValue="+(j-1)+"]").children());
                     gm.tileHandler.dropTile();
                 }
             }
