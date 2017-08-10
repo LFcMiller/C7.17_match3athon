@@ -1,7 +1,19 @@
 function Tile(pos) {
     this.pos = pos;
     
-    this.onClick;//callback
+    this.onClick = function(){
+        if(data.firstTile === null){
+            data.firstTile = this;
+            console.log(data.firstTile.pos);
+        }else{
+            data.secondTile = this;
+            console.log(data.secondTile.pos);
+            tileHandler.tradePosition(data.firstTile, data.secondTile);
+            tileHandler.checkTile();
+
+        }
+
+    };
     this.type = null; //type of tile
     this.matchesWith = [];//what it can match with
     this.dom = null;//img dom
@@ -10,10 +22,17 @@ function Tile(pos) {
     this.clickFocus = false; //is element currently clicked. Will effect on-screen animation
 
     this.drop = function(){
-        var tiles = gm.data.allTiles;
-        if(this.pos.y + 1 < gm.data.boardHeight ){
-            while(tiles[this.pos.y+1][this.pos.x] === null){
-                gm.tileHandler.moveTile(this, new Position(this.pos.x, this.pos.y+1));
+        var tiles = data.allTiles;
+        if(this.pos.y + 1 < data.boardHeight ){
+            while(true){
+                if(this.pos.y >= data.boardHeight - 1){
+                    break;
+                }
+                if(!tiles[this.pos.y+1][this.pos.x]){
+                    tileHandler.moveTile(this, new Position(this.pos.x, this.pos.y+1));
+                }else{
+                    break;
+                }
             }
         }
     };
@@ -44,21 +63,21 @@ function Tile(pos) {
         if(this.pos.y > 0 && this.pos.y < data.boardHeight-1){
             if(tileHandler.isMatch(tiles[t.pos.y-1][t.pos.x], t)
                 && tileHandler.isMatch(tiles[t.pos.y+1][t.pos.x], t)){
-                data.shouldDeletePosition.push(new Position(t.pos.x, t.pos.y-1));
-                data.shouldDeletePosition.push(new Position(t.pos.x, t.pos.y+1));
+                data.addShouldDeletePosition(new Position(t.pos.x, t.pos.y-1));
+                data.addShouldDeletePosition(new Position(t.pos.x, t.pos.y+1));
                 matched = true;
             }
         }
         if(this.pos.x > 0 && this.pos.x < data.boardWidth-1) {
             if (tileHandler.isMatch(tiles[t.pos.y][t.pos.x - 1], t)
                 && tileHandler.isMatch(tiles[t.pos.y][t.pos.x + 1], t)) {
-                data.shouldDeletePosition.push(new Position(t.pos.x - 1, t.pos.y));
-                data.shouldDeletePosition.push(new Position(t.pos.x + 1, t.pos.y));
+                data.addShouldDeletePosition(new Position(t.pos.x - 1, t.pos.y));
+                data.addShouldDeletePosition(new Position(t.pos.x + 1, t.pos.y));
                 matched = true;
             }
         }
         if (matched) {
-            data.shouldDeletePosition.push(new Position(t.pos.x, t.pos.y));
+            data.addShouldDeletePosition(new Position(t.pos.x, t.pos.y));
         }
     }
 }
