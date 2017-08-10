@@ -11,18 +11,26 @@ function TileHandler(){
         tile.matchesWith.push(tile.type);
         var image = $("<img>").attr("src", tile.type).addClass("tile");
         tile.dom = image;
-        gm.data.allTiles.push(tile);
-        var containerDiv = $("<div>").addClass("position").attr({"xValue": pos.x, "yValue": pos.y});
-        gm.data.allTileContainers.push(containerDiv);
-        tile.container = containerDiv;
-        containerDiv.append(image);
-        $("#gameWindow").append(containerDiv);
+        gm.data.allTiles[pos.x].push(tile);
+        var container = gm.data.allTileContainers[pos.x][pos.y];
+        tile.container = container;
+        tile.dom.appendTo(container);
     };
 
+    this.createContainer = function(pos){
+        var containerDiv = $("<div>").addClass("position").attr({"xValue": pos.x, "yValue": pos.y});
+        gm.data.allTileContainers[pos.x].push(containerDiv);
+        $("#gameWindow").append(containerDiv);
+    }
+
     this.createGameBoard = function(width,height) {
+
         $("#gameWindow").html("");
         for(var i = 0; i < width; i++) {
+            gm.data.allTiles.push([]);
+            gm.data.allTileContainers.push([]);
             for(var j = 0; j < height; j++) {
+                this.createContainer(new Position(i,j));
                 this.createTile(new Position(i,j));
             }
         }

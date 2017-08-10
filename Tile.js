@@ -1,9 +1,7 @@
 function Tile(pos) {
-    
-    this.targetPosition = pos;
-    this.currentPosition = function(){
-        return gm.data.getContainerPosition(this.container);
-    }
+        
+    this.position = pos;
+        
     this.shouldMove = function(){
         if(currentPosition().x !== this.targetPosition.x || currentPosition().y !== this.targetPosition.y){
             return true;
