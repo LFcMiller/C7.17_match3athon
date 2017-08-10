@@ -29,19 +29,31 @@ function TileHandler(){
                 this.createTile(new Position(j,i));
             }
         }
-    };
 
-    this.checkForInitialMatch = function(tile, resetTrigger) {
-
-        var x = tile.pos.x;
-        var y = tile.pos.y;
-        if(gm.checkForAllMatch(tile, resetTrigger)){
-            debugger;
-            var replaceTile = this.createTile(new Position(x,y));
-            data.currentMatchedTiles=[];
-            this.checkForInitialMatch(replaceTile, resetTrigger);
+        for(var i = 0; i< height; i++){
+            for(var j = 0; j < width; j++) {
+                if(this.checkForInitialMatch(data.allTiles[j][i], "reset")){
+                    i= i === 0 ? 0 : i-1;
+                    j= j === 0 ? -1 : j-2;
+                }
+            }
         }
     };
+    this.checkForInitialMatch = function(tile) {
+        console.log(tile.pos,tile.type,tile.changeOnStart());
+        var x = tile.pos.x;
+        var y = tile.pos.y;
+        if(tile.changeOnStart()){
+            this.deleteTile(tile.pos);
+            var replaceTile = this.createTile(new Position(x,y));
+            data.currentMatchedTiles=[];
+            this.checkForInitialMatch(replaceTile);
+            return true;
+        }
+        return false;
+    };
+
+
 
     this.dropTile = function(){
         for(var i = data.boardHeight-1; i >=0; --i){
