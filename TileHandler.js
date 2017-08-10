@@ -47,10 +47,7 @@ function TileHandler(){
     };
 
     this.tradePosition = function(tile1,tile2){
-        var tempPos = tile1.targetPosition;
-        tile1.targetPosition = tile2.targetPosition;
-        tile2.targetPosition = tempPos;
-        this.moveTile(tile1);
+        this.moveTile(tile1,tile1.pos);
         this.moveTile(tile2);
     };
 
