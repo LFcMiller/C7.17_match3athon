@@ -31,24 +31,21 @@ function TileHandler(){
                 this.createTile(new Position(j,i));
             }
         }
-        /*
         for(var i = 0; i< height; i++){
             for(var j = 0; j < width; j++) {
                 this.checkForInitialMatch(data.allTiles[j][i], "reset");
             }
         }
-        */
     };
-
-    this.checkForInitialMatch = function(tile, resetTrigger) {
+    this.checkForInitialMatch = function(tile) {
 
         var x = tile.pos.x;
         var y = tile.pos.y;
-        if(gm.checkForAllMatch(tile, resetTrigger)){
-            debugger;
+        if(tile.changeOnStart()){
+            this.deleteTile(tile.pos);
             var replaceTile = this.createTile(new Position(x,y));
             data.currentMatchedTiles=[];
-            this.checkForInitialMatch(replaceTile, resetTrigger);
+            this.checkForInitialMatch(replaceTile);
         }
     };
 

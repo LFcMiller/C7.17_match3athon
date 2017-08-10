@@ -5,7 +5,7 @@ function GameManager(){
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
         this.checkAllMatch();
         console.log(data.shouldDeletePosition);
-        //this.Timer();
+        this.Timer();
     };
 
 
@@ -182,10 +182,9 @@ function GameManager(){
                 return;
             }
             count();
-            console.log(data.timeLeft);
         },1000);
         }
-    }
+    };
 
     this.onTimeOut = function(){
         console.log("time out");
