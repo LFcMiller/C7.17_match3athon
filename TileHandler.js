@@ -10,6 +10,7 @@ function TileHandler(){
         var container = data.allTileContainers[pos.y][pos.x];
         tile.container = container;
         tile.dom.appendTo(container);
+        return tile;
     };
 
     this.createContainer = function(pos){
@@ -30,10 +31,18 @@ function TileHandler(){
                 this.createTile(new Position(j,i));
             }
         }
+        for(var i = 0; i< height; i++){
+            for(var j = 0; j < width; j++) {
+                this.checkForInitialMatch(data.allTiles[i][j], "reset");
+            }
+        }
     };
 
-    this.checkForInitialMatch = function() {
-
+    this.checkForInitialMatch = function(tile, resetTrigger) {
+        if(gm.checkForAllMatch(tile, resetTrigger)){
+            var replaceTile = this.createTile(new Position(tile.pos.y,tile.pos.x));
+            this.checkForInitialMatch(replaceTile, resetTrigger);
+        }
     };
 
     this.dropTile = function(){
@@ -56,19 +65,21 @@ function TileHandler(){
 
     this.moveTile = function(tile,newPosition){
         tiles = data.allTiles;
-        var oldPosition = tile.position;
+        var oldPosition = tile.pos;
         tiles[newPosition.y][newPosition.x] = tile;
         tiles[oldPosition.y][oldPosition.x] = null;
-        tile.position = newPosition;
+        tile.pos = newPosition;
         tile.container = data.allTileContainers[newPosition.y][newPosition.x];
         $(tile.container).append(tile.dom);
     };
 
     this.isMatch = function(tile1,tile2){
-        for(var m in tile1.matchesWith) {
-            for(var m2 in tile2.matchesWith){
-                if(tile1.matchesWith[m] === tile2.matchesWith[m2]){
-                    return true;
+        if(tile1 && tile2) {
+            for (var m in tile1.matchesWith) {
+                for (var m2 in tile2.matchesWith) {
+                    if (tile1.matchesWith[m] === tile2.matchesWith[m2]) {
+                        return true;
+                    }
                 }
             }
         }

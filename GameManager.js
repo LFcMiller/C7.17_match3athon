@@ -6,21 +6,21 @@ function GameManager(){
     };
 
     //should make these properties private 
-    this.checkForAllMatch = function(tile){ //check for match for all possibilities
+    this.checkForAllMatch = function(tile, resetTrigger){ //check for match for all possibilities
         if(tile.pos.y > 1) {
-            this.checkForMatchNegativeY(tile);
+            this.checkForMatchNegativeY(tile,resetTrigger);
         }
         if (tile.pos.x > 1) {
-            this.checkForMatchNegativeX(tile);
+            this.checkForMatchNegativeX(tile, resetTrigger);
         }
         if (tile.pos.x < 6) {
-            this.checkForMatchPositiveX(tile);
+            this.checkForMatchPositiveX(tile, resetTrigger);
         }
         if (tile.pos.y < 6) {
-            this.checkForMatchPositiveY(tile);
+            this.checkForMatchPositiveY(tile, resetTrigger);
         }
     }; 
-    this.checkForMatchNegativeX = function(tile){
+    this.checkForMatchNegativeX = function(tile, resetTrigger){
         if(tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x-1])) {
             data.currentMatchedTiles.push(tile);
             data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x-1]);
@@ -34,9 +34,9 @@ function GameManager(){
                                 data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x + 2]);
                             }
                         }
-                        data.handleMatch(data.currentMatchedTiles);
+                        gm.handleMatch(data.currentMatchedTiles, resetTrigger);
                     } else {
-                        data.handleMatch(data.currentMatchedTiles);
+                        gm.handleMatch(data.currentMatchedTiles, resetTrigger);
                     }
                 }
             } else {
@@ -44,7 +44,7 @@ function GameManager(){
             }
         }
     };
-    this.checkForMatchPositiveX = function(tile){
+    this.checkForMatchPositiveX = function(tile, resetTrigger){
         if(tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x+1])) {
             data.currentMatchedTiles.push(tile);
             data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+1]);
@@ -59,16 +59,16 @@ function GameManager(){
                             }
                         }
                     }
-                    data.handleMatch(data.currentMatchedTiles);
+                    gm.handleMatch(data.currentMatchedTiles, resetTrigger);
                 } else {
-                    data.handleMatch(data.currentMatchedTiles);
+                    gm.handleMatch(data.currentMatchedTiles, resetTrigger);
                 }
             } else {
                 data.currentMatchedTiles = [];
             }
         }
     };
-    this.checkForMatchNegativeY = function(tile){
+    this.checkForMatchNegativeY = function(tile, resetTrigger){
         if(tileHandler.isMatch(tile, data.allTiles[tile.pos.y-1][tile.pos.x])) {
             data.currentMatchedTiles.push(tile);
             data.currentMatchedTiles.push(data.allTiles[tile.pos.y-1][tile.pos.x]);
@@ -83,16 +83,16 @@ function GameManager(){
                             }
                         }
                     }
-                    data.handleMatch(data.currentMatchedTiles);
+                    gm.handleMatch(data.currentMatchedTiles, resetTrigger);
                 } else {
-                    data.handleMatch(data.currentMatchedTiles);
+                    gm.handleMatch(data.currentMatchedTiles, resetTrigger);
                 }
             } else {
                 data.currentMatchedTiles = [];
             }
         }
     };
-    this.checkForMatchPositiveY = function(tile){
+    this.checkForMatchPositiveY = function(tile, resetTrigger){
         if(tileHandler.isMatch(tile, data.allTiles[tile.pos.y+1][tile.pos.x])) {
             data.currentMatchedTiles.push(tile);
             data.currentMatchedTiles.push(data.allTiles[tile.pos.y+1][tile.pos.x]);
@@ -106,17 +106,22 @@ function GameManager(){
                                 data.currentMatchedTiles.push(data.allTiles[tile.pos.y - 2][tile.pos.x]);
                             }
                         }
-                        data.handleMatch(data.currentMatchedTiles);
                     }
+                    gm.handleMatch(data.currentMatchedTiles, resetTrigger);
                 } else {
-                    data.handleMatch(data.currentMatchedTiles);
+                    gm.handleMatch(data.currentMatchedTiles, resetTrigger);
                 }
             } else {
                 data.currentMatchedTiles = [];
             }
         }
     };
-    this.handleMatch = function(matchArray){ //handle match if actual match
+    this.handleMatch = function(matchArray, resetTrigger){ //handle match if actual match
+        if(resetTrigger){
+            tileHandler.deleteTile(matchArray[0].pos);
+            data.currentMatchedTiles = [];
+            return true;
+        }
         if(matchArray.length = 5) {
             data.score+=20;
         } else if(matchArray.length = 4) {
@@ -132,6 +137,7 @@ function GameManager(){
         for (var i = 0; i <matchArray.length; i++){
             var tile = new Tile(new Position(matchArray[i].pos.x, 0));
         }
+
         this.checkForAllMatch();
     };
     this.switchTiles = function(){}; //Can switch even if no match? If no match, squiggly red line under switched tiles?

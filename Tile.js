@@ -1,5 +1,5 @@
 function Tile(pos) {
-    this.position = pos;
+    this.pos = pos;
     
     this.onClick;//callback
     this.type = null; //type of tile
@@ -11,9 +11,9 @@ function Tile(pos) {
 
     this.drop = function(){
         var tiles = gm.data.allTiles;
-        if(this.position.y + 1 < gm.data.boardHeight ){
-            while(tiles[this.position.y+1][this.position.x] === null){
-                gm.tileHandler.moveTile(this, new Position(this.position.x, this.position.y+1));
+        if(this.pos.y + 1 < gm.data.boardHeight ){
+            while(tiles[this.pos.y+1][this.pos.x] === null){
+                gm.tileHandler.moveTile(this, new Position(this.pos.x, this.pos.y+1));
             }
         }
     };
