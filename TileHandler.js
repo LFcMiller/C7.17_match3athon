@@ -1,35 +1,30 @@
 function TileHandler(){
 
-    this.init = function(){
-
-    };
-
-
     this.createTile = function(pos){
         var tile = new Tile(pos);
         tile.type = tileTypes[Math.floor(Math.random()*tileTypes.length)];
         tile.matchesWith.push(tile.type);
         var image = $("<img>").attr("src", tile.type).addClass("tile");
         tile.dom = image;
-        gm.data.allTiles[pos.y].push(tile);
-        var container = gm.data.allTileContainers[pos.y][pos.x];
+        data.allTiles[pos.y].push(tile);
+        var container = data.allTileContainers[pos.y][pos.x];
         tile.container = container;
         tile.dom.appendTo(container);
     };
 
     this.createContainer = function(pos){
         var containerDiv = $("<div>").addClass("position").attr({"xValue": pos.x, "yValue": pos.y});
-        gm.data.allTileContainers[pos.y].push(containerDiv);
+        data.allTileContainers[pos.y].push(containerDiv);
         $("#gameWindow").append(containerDiv);
     };
 
     this.createGameBoard = function(width,height) {
         $("#gameWindow").html("");
-        gm.data.allTiles = [];
-        gm.data.allTileContainers = [];
+        data.allTiles = [];
+        data.allTileContainers = [];
         for(var i = 0; i < height; i++) {
-            gm.data.allTiles.push([]);
-            gm.data.allTileContainers.push([]);
+            data.allTiles.push([]);
+            data.allTileContainers.push([]);
             for(var j = 0; j < width; j++) {
                 this.createContainer(new Position(j,i));
                 this.createTile(new Position(j,i));
@@ -42,10 +37,10 @@ function TileHandler(){
     };
 
     this.dropTile = function(){
-        for(var i = gm.data.boardHeight-1; i >=0; --i){
-            for(var j = gm.data.boardWidth-1; j >=0 ; --j){
-                if(gm.data.allTiles[i][j]){
-                    gm.data.allTiles[i][j].drop();
+        for(var i = data.boardHeight-1; i >=0; --i){
+            for(var j = data.boardWidth-1; j >=0 ; --j){
+                if(data.allTiles[i][j]){
+                    data.allTiles[i][j].drop();
                 }
             }
         }
@@ -60,12 +55,12 @@ function TileHandler(){
     };
 
     this.moveTile = function(tile,newPosition){
-        tiles = gm.data.allTiles;
+        tiles = data.allTiles;
         var oldPosition = tile.position;
         tiles[newPosition.y][newPosition.x] = tile;
         tiles[oldPosition.y][oldPosition.x] = null;
         tile.position = newPosition;
-        tile.container = gm.data.allTileContainers[newPosition.y][newPosition.x];
+        tile.container = data.allTileContainers[newPosition.y][newPosition.x];
         $(tile.container).append(tile.dom);
     };
 
@@ -81,8 +76,8 @@ function TileHandler(){
     };
 
     this.deleteTile = function(position){
-        $(gm.data.allTiles[position.y][position.x].dom).remove();
-        gm.data.allTiles[position.y][position.x]=null;
+        $(data.allTiles[position.y][position.x].dom).remove();
+        data.allTiles[position.y][position.x]=null;
     }
     
 }

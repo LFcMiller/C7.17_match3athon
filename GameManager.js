@@ -1,16 +1,8 @@
 function GameManager(){
 
-    //TODO need default state
-    this.data = new GameData();
-    this.tileHandler = new TileHandler();
-
-    this.init = function(){
-        this.tileHandler.init();
-    };
-
     this.startGame = function(){
-        this.data.reset();
-        this.tileHandler.createGameBoard(this.data.boardWidth,this.data.boardHeight);
+        data.reset();
+        tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
     };
 
     //should make these properties private 
@@ -29,98 +21,98 @@ function GameManager(){
         }
     }; 
     this.checkForMatchNegativeX = function(tile){
-        if(gm.tileHandler.isMatch(tile, gm.data.allTiles[tile.pos.y][tile.pos.x-1])) {
-            gm.data.currentMatchedTiles.push(tile);
-            gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y][tile.pos.x-1]);
-            if(gm.tileHandler.isMatch(gm.data.allTiles[tile.pos.y][tile.pos.x-1],gm.data.allTiles[tile.pos.y][tile.pos.x-2])) {
-                gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y][tile.pos.x-2]);
-                if (gm.tileHandler.isMatch(tile, gm.data.allTiles[tile.pos.y][tile.pos.x+1])) {
-                    gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y][tile.pos.x+1]);
-                    if (gm.tileHandler.isMatch(gm.data.allTiles[tile.pos.y][tile.pos.x+1],gm.data.allTiles[tile.pos.y][tile.pos.x+2])) {
-                        gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y][tile.pos.x+2]);
+        if(tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x-1])) {
+            data.currentMatchedTiles.push(tile);
+            data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x-1]);
+            if(tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x-1],data.allTiles[tile.pos.y][tile.pos.x-2])) {
+                data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x-2]);
+                if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x+1])) {
+                    data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+1]);
+                    if (tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x+1],data.allTiles[tile.pos.y][tile.pos.x+2])) {
+                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+2]);
                     }
-                    gm.data.handleMatch(gm.data.currentMatchedTiles);
+                    data.handleMatch(data.currentMatchedTiles);
                 } else {
-                    gm.handleMatch(gm.data.currentMatchedTiles);
+                    handleMatch(data.currentMatchedTiles);
                 }
             } else {
-                gm.data.currentMatchedTiles = [];
+                data.currentMatchedTiles = [];
             }
         }
     };
     this.checkForMatchPositiveX = function(tile){
-        if(gm.tileHandler.isMatch(tile, gm.data.allTiles[tile.pos.y][tile.pos.x+1])) {
-            gm.data.currentMatchedTiles.push(tile);
-            gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y][tile.pos.x+1]);
-            if(gm.tileHandler.isMatch(gm.data.allTiles[tile.pos.y][tile.pos.x+1],gm.data.allTiles[tile.pos.y][tile.pos.x+2])) {
-                gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y][tile.pos.x+2]);
-                if (gm.tileHandler.isMatch(tile, gm.data.allTiles[tile.pos.y][tile.pos.x-1])) {
-                    gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y][tile.pos.x-1]);
-                    if (gm.tileHandler.isMatch(gm.data.allTiles[tile.pos.y][tile.pos.x-1],gm.data.allTiles[tile.pos.y][tile.pos.x-2])) {
-                        gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y][tile.pos.x-2]);
+        if(tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x+1])) {
+            data.currentMatchedTiles.push(tile);
+            data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+1]);
+            if(tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x+1],data.allTiles[tile.pos.y][tile.pos.x+2])) {
+                data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x+2]);
+                if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y][tile.pos.x-1])) {
+                    data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x-1]);
+                    if (tileHandler.isMatch(data.allTiles[tile.pos.y][tile.pos.x-1],data.allTiles[tile.pos.y][tile.pos.x-2])) {
+                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y][tile.pos.x-2]);
                     }
-                    gm.data.handleMatch(gm.data.currentMatchedTiles);
+                    data.handleMatch(data.currentMatchedTiles);
                 } else {
-                    gm.handleMatch(gm.data.currentMatchedTiles);
+                    gm.handleMatch(data.currentMatchedTiles);
                 }
             } else {
-                gm.data.currentMatchedTiles = [];
+                data.currentMatchedTiles = [];
             }
         }
     };
     this.checkForMatchNegativeY = function(tile){
-        if(gm.tileHandler.isMatch(tile, gm.data.allTiles[tile.pos.y-1][tile.pos.x])) {
-            gm.data.currentMatchedTiles.push(tile);
-            gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y-1][tile.pos.x]);
-            if(gm.tileHandler.isMatch(gm.data.allTiles[tile.pos.y-1][tile.pos.x],gm.data.allTiles[tile.pos.y-2][tile.pos.x])) {
-                gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y-2][tile.pos.x]);
-                if (gm.tileHandler.isMatch(tile, gm.data.allTiles[tile.pos.y+1][tile.pos.x])) {
-                    gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y+1][tile.pos.x]);
-                    if (gm.tileHandler.isMatch(gm.data.allTiles[tile.pos.y+1][tile.pos.x],gm.data.allTiles[tile.pos.y+2][tile.pos.x])) {
-                        gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y+2][tile.pos.x]);
+        if(tileHandler.isMatch(tile, data.allTiles[tile.pos.y-1][tile.pos.x])) {
+            data.currentMatchedTiles.push(tile);
+            data.currentMatchedTiles.push(data.allTiles[tile.pos.y-1][tile.pos.x]);
+            if(tileHandler.isMatch(data.allTiles[tile.pos.y-1][tile.pos.x],data.allTiles[tile.pos.y-2][tile.pos.x])) {
+                data.currentMatchedTiles.push(data.allTiles[tile.pos.y-2][tile.pos.x]);
+                if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y+1][tile.pos.x])) {
+                    data.currentMatchedTiles.push(data.allTiles[tile.pos.y+1][tile.pos.x]);
+                    if (tileHandler.isMatch(data.allTiles[tile.pos.y+1][tile.pos.x],data.allTiles[tile.pos.y+2][tile.pos.x])) {
+                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y+2][tile.pos.x]);
                     }
-                    gm.data.handleMatch(gm.data.currentMatchedTiles);
+                    data.handleMatch(data.currentMatchedTiles);
                 } else {
-                    gm.handleMatch(gm.data.currentMatchedTiles);
+                    gm.handleMatch(data.currentMatchedTiles);
                 }
             } else {
-                gm.data.currentMatchedTiles = [];
+                data.currentMatchedTiles = [];
             }
         }
     };
     this.checkForMatchPositiveY = function(tile){
-        if(gm.tileHandler.isMatch(tile, gm.data.allTiles[tile.pos.y+1][tile.pos.x])) {
-            gm.data.currentMatchedTiles.push(tile);
-            gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y+1][tile.pos.x]);
-            if(gm.tileHandler.isMatch(gm.data.allTiles[tile.pos.y+1][tile.pos.x],gm.data.allTiles[tile.pos.y+2][tile.pos.x])) {
-                gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y+2][tile.pos.x]);
-                if (gm.tileHandler.isMatch(tile, gm.data.allTiles[tile.pos.y-1][tile.pos.x])) {
-                    gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y-1][tile.pos.x]);
-                    if (gm.tileHandler.isMatch(gm.data.allTiles[tile.pos.y-1][tile.pos.x],gm.data.allTiles[tile.pos.y-2][tile.pos.x])) {
-                        gm.data.currentMatchedTiles.push(gm.data.allTiles[tile.pos.y-2][tile.pos.x]);
+        if(tileHandler.isMatch(tile, data.allTiles[tile.pos.y+1][tile.pos.x])) {
+            data.currentMatchedTiles.push(tile);
+            data.currentMatchedTiles.push(data.allTiles[tile.pos.y+1][tile.pos.x]);
+            if(tileHandler.isMatch(data.allTiles[tile.pos.y+1][tile.pos.x],data.allTiles[tile.pos.y+2][tile.pos.x])) {
+                data.currentMatchedTiles.push(data.allTiles[tile.pos.y+2][tile.pos.x]);
+                if (tileHandler.isMatch(tile, data.allTiles[tile.pos.y-1][tile.pos.x])) {
+                    data.currentMatchedTiles.push(data.allTiles[tile.pos.y-1][tile.pos.x]);
+                    if (tileHandler.isMatch(data.allTiles[tile.pos.y-1][tile.pos.x],data.allTiles[tile.pos.y-2][tile.pos.x])) {
+                        data.currentMatchedTiles.push(data.allTiles[tile.pos.y-2][tile.pos.x]);
                     }
-                    gm.data.handleMatch(gm.data.currentMatchedTiles);
+                    data.handleMatch(data.currentMatchedTiles);
                 } else {
-                    gm.handleMatch(gm.data.currentMatchedTiles);
+                    gm.handleMatch(data.currentMatchedTiles);
                 }
             } else {
-                gm.data.currentMatchedTiles = [];
+                data.currentMatchedTiles = [];
             }
         }
     };
     this.handleMatch = function(matchArray){ //handle match if actual match
         if(matchArray.length = 5) {
-            gm.data.score+=20;
+            data.score+=20;
         } else if(matchArray.length = 4) {
-            gm.data.score+=15;
+            data.score+=15;
         } else {
-            gm.data.score+=10
+            data.score+=10
         }
         for(var i = 0; i < matchArray.length; i++) {
-            gm.data.allTiles[matchArray[i].pos.y][matchArray[i].pos.x] = null;
+            data.allTiles[matchArray[i].pos.y][matchArray[i].pos.x] = null;
             $("div[xValue="+(matchArray[i].pos.x)+"][yValue="+(matchArray[i].pos.y)+"]").html("");
         }
-        gm.tileHandler.dropTile();
+        tileHandler.dropTile();
         for (var i = 0; i <matchArray.length; i++){
             var tile = new Tile(new Position(matchArray[i].pos.x, 0));
         }
