@@ -37,7 +37,9 @@ function TileHandler(){
             }
         }
     };
-
+    this.initialCheckLoop = function() {
+        var 
+    };
     this.checkForInitialMatch = function(tile, resetTrigger) {
 
         var x = tile.pos.x;
