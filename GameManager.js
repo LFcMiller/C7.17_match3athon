@@ -1,7 +1,7 @@
 function GameManager(){
 
     this.startGame = function(){
-        $("div > img").off();
+        $(".position").off();
         data.reset();
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
         this.checkAllMatch();
@@ -72,6 +72,11 @@ function GameManager(){
     };
 
     this.onTimeOut = function(){
-        console.log("time out");
+        view.displayModalLose();
+        if (data.score > localStorage.highScore) {
+            localStorage.highScore = data.score;
+        }
+        $(".localHighScore").text(localStorage.highScore);
+        $(".position").off();
     }
 }

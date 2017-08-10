@@ -8,11 +8,12 @@ var view = new View();
 
 function init(){
     $(".startButton").on("click", gm.startGame.bind(gm));
-}
-
-
-function test(){
-    console.log("test success");
+    $(".modalWin").on("click", view.displayModalWin);
+    $(".modalLose").on("click", view.displayModalLose);
+    if(localStorage.highScore === undefined) {
+        localStorage.highScore = 0;
+    }
+    $(".localHighScore").text(localStorage.highScore);
 }
 
 
