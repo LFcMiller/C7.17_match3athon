@@ -110,6 +110,23 @@ function TileHandler(){
         return false;
     };
 
+    this.checkTile = function(){
+        if(data.firstTile === null) {
+            data.firstTile = data.allTiles[$(this).attr("yValue")][$(this).attr("xValue")];
+        } else {
+            if(data.firstTile !== this){
+                data.secondTile = data.allTiles[$(this).attr("yValue")][$(this).attr("xValue")];
+                tileHandler.tradePosition(data.firstTile, data.secondTile);
+                gm.checkAllMatch();
+                gm.deleteAllMatch();
+                data.firstTile = null;
+                data.secondTile = null;
+            } else {
+                return;
+            }
+        }
+    };
+
     this.deleteTile = function(position){
         $(data.allTiles[position.y][position.x].dom).remove();
         data.allTiles[position.y][position.x]=null;

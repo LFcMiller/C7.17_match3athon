@@ -1,10 +1,13 @@
 function GameManager(){
 
     this.startGame = function(){
+        $("div > img").off();
         data.reset();
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
         this.checkAllMatch();
-        //this.Timer();
+        console.log(data.shouldDeletePosition);
+        this.Timer();
+        $(".position").on("click", tileHandler.checkTile);
     };
 
 
@@ -16,6 +19,14 @@ function GameManager(){
         }
     };
 
+    this.deleteAllMatch = function() {
+        data.score+=(data.shouldDeletePosition.length*5)
+        for (var i = 0; i < data.shouldDeletePosition.length; i++) {
+            tileHandler.deleteTile(data.shouldDeletePosition[i]);
+        }
+        data.shouldDeletePosition = [];
+        tileHandler.dropTile();
+    };
 
     this.handleMatch = function(matchArray, resetTrigger){ //handle match if actual match
         if(resetTrigger){
