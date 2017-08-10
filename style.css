@@ -29,6 +29,9 @@ body {
 .phpIcon {
     height: 95%;
 }
+.topBarTitle {
+    font-family: Arial;
+}
 #gameWindow {
     height: 95%;
     width: 100%;
