@@ -3,7 +3,7 @@ function GameManager(){
     this.startGame = function(){
         data.reset();
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
-        //this.Timer();
+        this.Timer();
     };
 
     //should make these properties private 
@@ -150,13 +150,14 @@ function GameManager(){
 
         function count(){
             setTimeout(function(){
-            data.currentTime += 1;
-            if(data.currentTime >= data.timeLimit){
-                onTimeOut();
+            data.timeLeft -= 1;
+            view.updateTime();
+            if(data.timeLeft <=0){
+                gm.onTimeOut();
                 return;
             }
             count();
-            console.log(data.currentTime);
+            console.log(data.timeLeft);
         },1000);
         }
     }

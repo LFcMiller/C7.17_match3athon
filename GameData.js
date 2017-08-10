@@ -15,8 +15,7 @@ function GameData(){
     };
 
     this.score = null; //current score
-    this.timeLimit = 60; //seconds
-    this.currentTime = 0;
+    this.timeLeft = 60; //seconds
     this.firstTile = null; //first tile clicked
     this.secondTile = null; //second tile clicked
     this.currentMatchedTiles = [];

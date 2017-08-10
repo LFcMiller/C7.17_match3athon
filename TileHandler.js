@@ -57,12 +57,12 @@ function TileHandler(){
 
     this.tradePosition = function(tile1,tile2){
         tiles = data.allTiles;
-            tiles[tile2.position.y][tile2.position.x] = tile1;
-            tiles[tile1.position.y][tile1.position.x] = tile2;
+            tiles[tile2.pos.y][tile2.pos.x] = tile1;
+            tiles[tile1.pos.y][tile1.pos.x] = tile2;
             var temp = null;
-            temp = tile1.position;
-            tile1.position = tile2.position;
-            tile2.position = temp;
+            temp = tile1.pos;
+            tile1.pos = tile2.pos;
+            tile2.pos = temp;
             temp = tile1.container;
             tile1.container = tile2.container;
             tile2.container = temp;
@@ -70,20 +70,20 @@ function TileHandler(){
             $(tile2.container).append(tile2.dom);
     };
 
-    this.moveTile = function(tile,newPosition){
+    this.moveTile = function(tile,newPos){
         if(tile === null){
             return;
         }
         tiles = data.allTiles;
-        var oldPosition = tile.position;
-        if(tiles[newPosition.y][newPosition.x] === null){
-            tiles[newPosition.y][newPosition.x] = tile;
-            tiles[oldPosition.y][oldPosition.x] = null;
-            tile.position = newPosition;
-            tile.container = data.allTileContainers[newPosition.y][newPosition.x];
+        var oldPos = tile.pos;
+        if(tiles[newPos.y][newPos.x] === null){
+            tiles[newPos.y][newPos.x] = tile;
+            tiles[oldPos.y][oldPos.x] = null;
+            tile.pos = newPos;
+            tile.container = data.allTileContainers[newPos.y][newPos.x];
             $(tile.container).append(tile.dom);
         }else{
-            this.tradePosition(tiles[newPosition.y][newPosition.x], tiles[oldPosition.y][oldPosition.x]);
+            this.tradePosition(tiles[newPos.y][newPos.x], tiles[oldPos.y][oldPos.x]);
         }
     };
 
