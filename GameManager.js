@@ -25,6 +25,11 @@ function GameManager(){
         }
         for(var i = 0; i < matchArray.length; i++) {
             gm.data.allTiles[matchArray[i].pos.y][matchArray[i].pos.x] = null;
+            $("div[xValue="+(matchArray[i].pos.x)+"][yValue="+(matchArray[i].pos.y)+"]").html("");
+        }
+        gm.tileHandler.dropTile();
+        for (var i = 0; i <matchArray.length; i++){
+            var tile = new Tile(new Position(matchArray[i].pos.x, 0));
         }
     };
     this.switchTiles = function(){}; //Can switch even if no match? If no match, squiggly red line under switched tiles?
