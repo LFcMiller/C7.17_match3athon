@@ -24,7 +24,7 @@ function GameData(){
 
     this.getTileByPosition = function(pos){
         for(var t in this.allTiles){
-            if(this.allTiles[t].pos === pos){
+            if(this.allTiles[t].pos.x === pos.x && this.allTiles[t].pos.y === pos.y){
                 return this.allTiles[t];
             }
         }

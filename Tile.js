@@ -19,6 +19,5 @@ function Tile(pos) {
     
     this.match = function(){}; //behavior on match
     this.clickFocus = false; //is element currently clicked. Will effect on-screen animation
-    this.delete = function(){}; //delete element
 
 }
