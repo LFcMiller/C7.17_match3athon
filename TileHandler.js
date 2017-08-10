@@ -24,7 +24,6 @@ function TileHandler(){
     }
 
     this.createGameBoard = function(width,height) {
-
         $("#gameWindow").html("");
         for(var i = 0; i < width; i++) {
             gm.data.allTiles.push([]);
