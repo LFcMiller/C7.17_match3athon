@@ -4,7 +4,8 @@ function GameManager(){
         data.reset();
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
         this.checkAllMatch();
-        //this.Timer();
+        this.Timer();
+        view.updateTime();
     };
 
 
@@ -62,5 +63,15 @@ function GameManager(){
 
     this.onTimeOut = function(){
         console.log("time out");
-    }
+        this.onLose();
+    };
+
+    //when add score, check score,if higher then goal, call this func
+    this.onWin = function(){
+
+    };
+
+    this.onLose = function(){
+
+    };
 }
