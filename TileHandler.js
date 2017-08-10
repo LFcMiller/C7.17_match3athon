@@ -38,15 +38,10 @@ function TileHandler(){
 
 
     this.dropTile = function(){
-        var tiles = gm.data.allTiles;
-        var containers = gm.data.allTileContainers;
-        for (var i = gm.data.boardHeight-1; i>=0; i--) {
-            for(var j = gm.data.boardWidth-1; j>0; j--) {
-                if(!tiles[j][i]){
-                    $(containers[j][i]).append(tiles[j][i-1]);
-                    tiles[j][i].position.x = j;
-                    tiles[j][i].position.y = i;
-                    gm.tileHandler.dropTile();
+        for(var i = gm.data.boardHeight-1; i >=0; --i){
+            for(var j = gm.data.boardWidth-1; j >=0 ; --j){
+                if(gm.data.allTiles[i][j]){
+                    gm.data.allTiles[i][j].drop();
                 }
             }
         }
@@ -60,10 +55,14 @@ function TileHandler(){
         this.moveTile(tile2);
     };
 
-    this.moveTile = function(tile){
-        var targetContainer = gm.data.getTileContainerByPosition(tile.targetPosition);
-        tile.container = targetContainer;
-        $(targetContainer).append(tile.dom);
+    this.moveTile = function(tile,newPosition){
+        tiles = gm.data.allTiles;
+        var oldPosition = tile.position;
+        tiles[newPosition.y][newPosition.x] = tile;
+        tiles[oldPosition.y][oldPosition.x] = null;
+        tile.position = newPosition;
+        tile.container = gm.data.allTileContainers[newPosition.y][newPosition.x];
+        $(tile.container).append(tile.dom);
     };
 
     this.isMatch = function(tile1,tile2){
@@ -77,10 +76,9 @@ function TileHandler(){
         return false;
     };
 
-    //parameter could be tile or position
-    this.deleteTile = function(){
-        
+    this.deleteTile = function(position){
+        $(gm.data.allTiles[position.y][position.x].dom).remove();
+        gm.data.allTiles[position.y][position.x]=null;
     }
-
     
 }
