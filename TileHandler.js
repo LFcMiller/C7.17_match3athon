@@ -40,7 +40,7 @@ function TileHandler(){
         }
     };
     this.checkForInitialMatch = function(tile) {
-        console.log(tile.pos,tile.type,tile.changeOnStart());
+        //console.log(tile.pos,tile.type,tile.changeOnStart());
         var x = tile.pos.x;
         var y = tile.pos.y;
         if(tile.changeOnStart()){
@@ -111,20 +111,24 @@ function TileHandler(){
     };
 
     this.checkTile = function(){
-        if(data.firstTile === null) {
-            data.firstTile = data.allTiles[$(this).attr("yValue")][$(this).attr("xValue")];
-        } else {
-            if(data.firstTile !== this){
-                data.secondTile = data.allTiles[$(this).attr("yValue")][$(this).attr("xValue")];
-                tileHandler.tradePosition(data.firstTile, data.secondTile);
-                gm.checkAllMatch();
-                gm.deleteAllMatch();
-                data.firstTile = null;
-                data.secondTile = null;
-            } else {
-                return;
+        if(gm.checkAllMatch()){
+            gm.deleteAllMatch();
+        }
+        data.firstTile = null;
+        data.secondTile = null;
+    };
+
+    this.refillEmptySpace = function(){
+        var refilled = false;
+        for(var i = 0; i < data.boardHeight; ++i){
+            for(var j = 0; j < data.boardHeight; ++j){
+                if(!data.allTiles[i][j]){
+                    this.createTile(new Position(j,i));
+                    refilled = true;
+                }
             }
         }
+        return refilled;
     };
 
     this.deleteTile = function(position){
