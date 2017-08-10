@@ -5,23 +5,16 @@ var allTiles = [];
 var gm = null;
 
 function init(){
-    
     gm = new GameManager();
     gm.init();
-    $(".startButton").on("click", function(){gm.eventManager.raise("startGame")});
-
-
-    
-    gm.eventManager.add_listener("onTileClick",test);
-    
+    $(".startButton").on("click", gm.startGame);
 }
 
 //tile not finished, each tile store it's button
 function setTileOnClick(tileArray){
     for(var t in tileArray){
         var tile = tileArray[t];
-        var img = tile.dom;
-        $(img).on("click",function(){gm.eventManager.raise("onTileClick", img)});
+        
     }
 }
 

@@ -1,7 +1,7 @@
 function TileHandler(){
 
     this.init = function(){
-        gm.eventManager.add_listener("tradePosition", this.tradePosition);
+
     };
 
 
@@ -51,7 +51,7 @@ function TileHandler(){
         var targetContainer = gm.data.getTileContainerByPosition(tile.targetPosition);
         tile.container = targetContainer;
         $(targetContainer).append(tile.dom);
-    }
+    };
 
     this.isMatch = function(tile1,tile2){
         for(var m in tile1.matchesWith) {

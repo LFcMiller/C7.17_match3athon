@@ -2,12 +2,12 @@ function Tile(pos) {
     this.targetPosition = pos;
     this.currentPosition = function(){
         return gm.data.getContainerPosition(this.container);
-    }
+    };
     this.shouldMove = function(){
         if(currentPosition().x !== this.targetPosition.x || currentPosition().y !== this.targetPosition.y){
             return true;
         }
-    }
+    };
     this.onClick;//callback
     this.type = null; //type of tile
     this.matchesWith = [];//what it can match with
