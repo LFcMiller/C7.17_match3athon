@@ -10,7 +10,7 @@ function Tile(pos) {
         }
     }
 
-    this.onClicked;//callback
+    this.onClick;//callback
 
     this.type = null; //type of tile
     this.matchesWith = [];//what it can match with

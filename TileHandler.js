@@ -1,7 +1,7 @@
 function TileHandler(){
 
     this.init = function(){
-        gm.eventManager.add_listener("tradePosition", this.tradePosition);
+
     };
 
 
