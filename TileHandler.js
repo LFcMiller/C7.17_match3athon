@@ -35,11 +35,17 @@ function TileHandler(){
         }
     };
 
+
+
     this.dropTile = function(){
+        var tiles = gm.data.allTiles;
+        var containers = gm.data.allTileContainers;
         for (var i = gm.data.boardHeight-1; i>=0; i--) {
             for(var j = gm.data.boardWidth-1; j>0; j--) {
-                if(!($("div[xValue="+i+"][yValue="+j+"]").children().length)){
-                    $("div[xValue="+i+"][yValue="+j+"]").append($("div[xValue="+i+"][yValue="+(j-1)+"]").children());
+                if(!tiles[j][i]){
+                    $(containers[j][i]).append(tiles[j][i-1]);
+                    tiles[j][i].position.x = j;
+                    tiles[j][i].position.y = i;
                     gm.tileHandler.dropTile();
                 }
             }
