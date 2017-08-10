@@ -4,8 +4,7 @@ function GameManager(){
         data.reset();
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
         this.checkAllMatch();
-        console.log(data.shouldDeletePosition);
-        this.Timer();
+        //this.Timer();
     };
 
 

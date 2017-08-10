@@ -20,9 +20,7 @@ function TileHandler(){
     };
 
     this.createGameBoard = function(width,height) {
-        $("#gameWindow").html("");
-        data.allTiles = [];
-        data.allTileContainers = [];
+
         for(var i = 0; i < height; i++) {
             data.allTiles.push([]);
             data.allTileContainers.push([]);
@@ -31,14 +29,18 @@ function TileHandler(){
                 this.createTile(new Position(j,i));
             }
         }
+
         for(var i = 0; i< height; i++){
             for(var j = 0; j < width; j++) {
-                this.checkForInitialMatch(data.allTiles[j][i], "reset");
+                if(this.checkForInitialMatch(data.allTiles[j][i], "reset")){
+                    i= i === 0 ? 0 : i-1;
+                    j= j === 0 ? -1 : j-2;
+                }
             }
         }
     };
     this.checkForInitialMatch = function(tile) {
-
+        console.log(tile.pos,tile.type,tile.changeOnStart());
         var x = tile.pos.x;
         var y = tile.pos.y;
         if(tile.changeOnStart()){
@@ -46,8 +48,12 @@ function TileHandler(){
             var replaceTile = this.createTile(new Position(x,y));
             data.currentMatchedTiles=[];
             this.checkForInitialMatch(replaceTile);
+            return true;
         }
+        return false;
     };
+
+
 
     this.dropTile = function(){
         for(var i = data.boardHeight-1; i >=0; --i){
