@@ -20,6 +20,8 @@ function Tile(pos) {
 
     this.changeOnStart = function(){
         var result = false;
+        var tiles = data.allTiles;
+        var t = tiles[this.pos.y][this.pos.x];
         if(this.pos.y > 0 && this.pos.y < data.boardHeight-1){
             if(tileHandler.isMatch(tiles[t.pos.y-1][t.pos.x], t)
                 && tileHandler.isMatch(tiles[t.pos.y+1][t.pos.x], t)){
