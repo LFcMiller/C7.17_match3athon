@@ -3,7 +3,6 @@ function GameManager(){
     //TODO need default state
     this.data = new GameData();
     this.tileHandler = new TileHandler();
-    var that = this;
 
     this.init = function(){
         this.tileHandler.init();
