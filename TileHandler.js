@@ -32,7 +32,7 @@ function TileHandler(){
 
         for(var i = 0; i< height; i++){
             for(var j = 0; j < width; j++) {
-                if(this.checkForInitialMatch(data.allTiles[j][i], "reset")){
+                if(this.checkForInitialMatch(data.allTiles[j][i])){
                     i= i === 0 ? 0 : i-1;
                     j= j === 0 ? -1 : j-2;
                 }
@@ -46,7 +46,6 @@ function TileHandler(){
         if(tile.changeOnStart()){
             this.deleteTile(tile.pos);
             var replaceTile = this.createTile(new Position(x,y));
-            data.currentMatchedTiles=[];
             this.checkForInitialMatch(replaceTile);
             return true;
         }
