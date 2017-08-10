@@ -28,10 +28,10 @@ function EventManager(){
         }
     };
 
-    this.raise = function(event_name, sender, args){
+    this.raise = function(event_name, sender, arg1, arg2, arg3){
         var e = getEventByName(event_name);
         for(var li in e.listener){
-            e.listener[li]();
+            e.listener[li](event_name, sender, arg1, arg2, arg3);
         }
     };
 
