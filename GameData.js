@@ -22,7 +22,11 @@ function GameData(){
     };
 
     this.reset = function(){
-        //this.score = 0;
+        this.timeLeft = 60;
+        this.score = 0;
+        $("#gameWindow").html("");
+        data.allTiles = [];
+        data.allTileContainers = [];
     };
 
     this.score = null; //current score

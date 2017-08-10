@@ -49,7 +49,6 @@ function Tile(pos) {
                 matched = true;
             }
         }
-
         if(this.pos.x > 0 && this.pos.x < data.boardWidth-1) {
             if (tileHandler.isMatch(tiles[t.pos.y][t.pos.x - 1], t)
                 && tileHandler.isMatch(tiles[t.pos.y][t.pos.x + 1], t)) {
