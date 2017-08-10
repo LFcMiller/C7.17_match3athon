@@ -3,6 +3,7 @@ function GameManager(){
     this.startGame = function(){
         data.reset();
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
+        this.Timer();
     };
 
     //should make these properties private 
@@ -142,4 +143,26 @@ function GameManager(){
     };
     this.switchTiles = function(){}; //Can switch even if no match? If no match, squiggly red line under switched tiles?
     this.shrinkBoard = function(){};
+
+    this.Timer = function(){
+        
+        count();
+
+        function count(){
+            setTimeout(function(){
+            data.timeLeft -= 1;
+            view.updateTime();
+            if(data.timeLeft <=0){
+                gm.onTimeOut();
+                return;
+            }
+            count();
+            console.log(data.timeLeft);
+        },1000);
+        }
+    }
+
+    this.onTimeOut = function(){
+        console.log("time out");
+    }
 }
