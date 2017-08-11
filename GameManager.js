@@ -12,7 +12,6 @@ function GameManager(){
         view.updateTime();
     };
 
-
     this.checkAllMatch = function(){
         var hasMatch = false;
         for(var i = 0; i < data.boardHeight; ++i){
@@ -29,6 +28,7 @@ function GameManager(){
     this.deleteAllMatch = function() {
         var deleted = data.shouldDeletePosition.length > 0;
         data.score+=(data.shouldDeletePosition.length*5);
+        $(".score").text(data.score);
         console.log(data.shouldDeletePosition);
         for (var i = 0; i < data.shouldDeletePosition.length; i++) {
             tileHandler.deleteTile(data.shouldDeletePosition[i]);
@@ -61,18 +61,21 @@ function GameManager(){
     };
 
     this.onTimeOut = function(){
-        view.displayModalLose();
+        if (data.score > 500) {
+            this.onWin();
+        } else {
+            this.onLose();
+        }
+    };
+
+    //when add score, check score,if higher then goal, call this func
+    this.onWin = function(){
+        view.displayModalWin();
         if (data.score > localStorage.highScore) {
             localStorage.highScore = data.score;
         }
         $(".localHighScore").text(localStorage.highScore);
         $(".position").off();
-        this.onLose();
-    };
-
-    //when add score, check score,if higher then goal, call this func
-    this.onWin = function(){
-
     };
 
     this.onLose = function(){
