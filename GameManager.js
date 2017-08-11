@@ -1,8 +1,11 @@
 function GameManager(){
 
+    this.timerID = null;
+
     this.startGame = function(){
         $(".position").off();
         data.reset();
+        clearTimeout(gm.timerID);
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
         this.checkAllMatch();
         this.Timer();
@@ -48,7 +51,7 @@ function GameManager(){
         count();
 
         function count(){
-            setTimeout(function(){
+            gm.timerID = setTimeout(function(){
             data.timeLeft -= 1;
             view.updateTime();
             if(data.timeLeft <=0){
