@@ -2,8 +2,19 @@ function TileHandler(){
 
     this.createTile = function(pos){
         var tile = new Tile(pos);
-        tile.type = tileTypes[Math.floor(Math.random()*tileTypes.length)];
-        tile.matchesWith.push(tile.type);
+        var isSpecial = Math.random() < 0.05;
+
+        if(isSpecial){
+            console.log(isSpecial);
+            tile.type = specialTileTypes[1];
+            for(var t in tileTypes){
+                tile.matchesWith.push(tileTypes[t]);
+            }
+        }else{
+            tile.type = tileTypes[Math.floor(Math.random()*tileTypes.length)];
+            tile.matchesWith.push(tile.type);
+        }
+
         var image = $("<img>").attr("src", tile.type).addClass("tile");
         tile.dom = image;
         data.allTiles[pos.y][pos.x] = tile;

@@ -6,8 +6,6 @@ function GameData(){
     this.allTiles = [];
     this.allTileContainers = [];
 
-    this.tileTypes = ["icons/chrome.png","icons/Css.png","icons/html5.png","icons/IE.png","icons/js.png","icons/php.png","icons/react.png"];
-
     this.shouldDeletePosition = [];
     this.addShouldDeletePosition = function(pos){
         var repeat = false;

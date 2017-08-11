@@ -4,10 +4,11 @@ function Tile(pos) {
     this.onClick = function(){
         if(data.firstTile === null){
             data.firstTile = this;
-            console.log(data.firstTile.pos);
         }else{
+            if(this === data.firstTile){
+                return;
+            }
             data.secondTile = this;
-            console.log(data.secondTile.pos);
             tileHandler.tradePosition(data.firstTile, data.secondTile);
             tileHandler.checkTile();
 

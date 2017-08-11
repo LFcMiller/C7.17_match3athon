@@ -47,9 +47,7 @@ function GameManager(){
     };
 
     this.Timer = function(){
-        
         count();
-
         function count(){
             gm.timerID = setTimeout(function(){
             data.timeLeft -= 1;
