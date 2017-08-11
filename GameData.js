@@ -30,6 +30,7 @@ function GameData(){
     this.score = null; //current score
     this.timeLeft = 60; //seconds
     this.firstTile = null; //first tile clicked
+    this.firstTileContainer = null;
     this.secondTile = null; //second tile clicked
     this.currentMatchedTiles = [];
 }
