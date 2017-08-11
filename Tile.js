@@ -5,6 +5,9 @@ function Tile(pos) {
         if(data.firstTile === null){
             data.firstTile = this;
         }else{
+            if(this === data.firstTile){
+                return;
+            }
             data.secondTile = this;
             tileHandler.tradePosition(data.firstTile, data.secondTile);
             tileHandler.checkTile();
