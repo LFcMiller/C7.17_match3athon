@@ -1,8 +1,11 @@
 function GameManager(){
 
+    this.timerID = null;
+
     this.startGame = function(){
         $(".position").off();
         data.reset();
+        clearTimeout(gm.timerID);
         tileHandler.createGameBoard(data.boardWidth,data.boardHeight);
         this.checkAllMatch();
         this.Timer();
@@ -11,7 +14,6 @@ function GameManager(){
         });
         view.updateTime();
     };
-
 
     this.checkAllMatch = function(){
         var hasMatch = false;
@@ -29,6 +31,7 @@ function GameManager(){
     this.deleteAllMatch = function() {
         var deleted = data.shouldDeletePosition.length > 0;
         data.score+=(data.shouldDeletePosition.length*5);
+        $(".score").text(data.score);
         console.log(data.shouldDeletePosition);
         for (var i = 0; i < data.shouldDeletePosition.length; i++) {
             tileHandler.deleteTile(data.shouldDeletePosition[i]);
@@ -46,7 +49,7 @@ function GameManager(){
     this.Timer = function(){
         count();
         function count(){
-            setTimeout(function(){
+            gm.timerID = setTimeout(function(){
             data.timeLeft -= 1;
             view.updateTime();
             if(data.timeLeft <=0){
@@ -59,18 +62,21 @@ function GameManager(){
     };
 
     this.onTimeOut = function(){
-        view.displayModalLose();
+        if (data.score > 500) {
+            this.onWin();
+        } else {
+            this.onLose();
+        }
+    };
+
+    //when add score, check score,if higher then goal, call this func
+    this.onWin = function(){
+        view.displayModalWin();
         if (data.score > localStorage.highScore) {
             localStorage.highScore = data.score;
         }
         $(".localHighScore").text(localStorage.highScore);
         $(".position").off();
-        this.onLose();
-    };
-
-    //when add score, check score,if higher then goal, call this func
-    this.onWin = function(){
-
     };
 
     this.onLose = function(){
