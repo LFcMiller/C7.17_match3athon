@@ -44,9 +44,7 @@ function GameManager(){
     };
 
     this.Timer = function(){
-        
         count();
-
         function count(){
             setTimeout(function(){
             data.timeLeft -= 1;
