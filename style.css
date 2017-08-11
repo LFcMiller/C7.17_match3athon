@@ -57,6 +57,8 @@ body {
 }
 .tile {
     height: 90%;
+    animation-name: fade;
+    animation-duration: 2s;
 }
 .bottomBar {
     height: 6vh;
@@ -78,6 +80,10 @@ body {
     height: 60%;
     position: relative;
     top: 50%;
+    vertical-align: middle;
+}
+.startText {
+    margin: 0 0 0 10%;
 }
 .scoreContainer {
     height: 90%;
@@ -153,4 +159,15 @@ body {
 }
 .hidden {
     display: none;
+}
+.highlight {
+    border-bottom: 3px dashed red;
+    box-sizing: border-box;
+}
+.noAnimation {
+    animation: none;
+}
+@keyframes fade {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }

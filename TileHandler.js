@@ -88,6 +88,8 @@ function TileHandler(){
             tile2.container = temp;
             $(tile1.container).append(tile1.dom);
             $(tile2.container).append(tile2.dom);
+            $(tile1.dom).addClass("noAnimation");
+            $(tile2.dom).addClass("noAnimation");
     };
 
     this.moveTile = function(tile,newPos){
@@ -101,7 +103,8 @@ function TileHandler(){
             tiles[oldPos.y][oldPos.x] = null;
             tile.pos = newPos;
             tile.container = data.allTileContainers[newPos.y][newPos.x];
-            $(tile.container).append(tile.dom);
+            $(tile.container).append(tile.dom)
+            $(tile.dom).addClass("noAnimation");
         }else{
             this.tradePosition(tiles[newPos.y][newPos.x], tiles[oldPos.y][oldPos.x]);
         }
@@ -125,6 +128,7 @@ function TileHandler(){
         if(gm.checkAllMatch()){
             gm.deleteAllMatch();
         }
+        data.firstTileContainer.removeClass("highlight")
         data.firstTile = null;
         data.secondTile = null;
     };

@@ -4,8 +4,12 @@ function Tile(pos) {
     this.onClick = function(){
         if(data.firstTile === null){
             data.firstTile = this;
+            data.firstTileContainer = data.firstTile.container;
+            data.firstTileContainer.addClass("highlight");
         }else{
             if(this === data.firstTile){
+                data.firstTile = null;
+                data.firstTileContainer.removeClass("highlight");
                 return;
             }
             data.secondTile = this;
@@ -19,8 +23,6 @@ function Tile(pos) {
     this.matchesWith = [];//what it can match with
     this.dom = null;//img dom
     this.container = null;//container dom
-    this.match = function(){}; //behavior on match
-    this.clickFocus = false; //is element currently clicked. Will effect on-screen animation
 
     this.drop = function(){
         var tiles = data.allTiles;
