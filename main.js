@@ -1,5 +1,5 @@
 $(document).ready(init);
-var tileTypes = ["icons/Css.png","icons/html5.png","icons/js.png","icons/php.png","icons/react.png"];
+var tileTypes = ["Icons/Css.png","Icons/html5.png","Icons/js.png","Icons/php.png","Icons/react.png"];
 var specialTileTypes = ["icons/IE.png","icons/chrome.png"];
 var gm = new GameManager();
 var data = new GameData();
