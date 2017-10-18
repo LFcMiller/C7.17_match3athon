@@ -1,6 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
+    font-size: 2vmin;
 }
 .desktop {
     width: 100vw;
@@ -13,8 +14,8 @@ body {
     background-position: center center;
 }
 #gameArea {
-    width: 45vw;
-    height: 85vh;
+    width: 85vmin;
+    height: 85vmin;
     z-index: 10;
     background-color: white;
     position: absolute;
@@ -58,10 +59,10 @@ body {
 .tile {
     height: 90%;
     animation-name: fade;
-    animation-duration: 2s;
+    transition-duration: 10s;
 }
 .bottomBar {
-    height: 6vh;
+    height: 6vmin;
     width: 100vw;
     box-sizing: border-box;
     background-color: #f0f0f0;
@@ -75,15 +76,17 @@ body {
     height: 90%;
     width: 5%;
     border: 2px outset #a0a0a0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .windows {
-    height: 60%;
-    position: relative;
-    top: 50%;
-    vertical-align: middle;
+    height: 40%;
+    width: 30%;
 }
 .startText {
     margin: 0 0 0 5%;
+    font-size: 2vmin;
 }
 .scoreContainer {
     height: 90%;
@@ -92,12 +95,12 @@ body {
     display: flex;
     justify-content: space-between;
 }
-.score {
+.currentScore {
     background-color: #f0f0f0;
     box-sizing: border-box;
     margin: 0 0 0 1%;
     height: 100%;
-    width: 5%;
+    width: 15%;
     border: 2px outset #a0a0a0;
     display: flex;
     justify-content: center;
@@ -135,21 +138,31 @@ body {
     height: 30%;
     width: 35%;
 }
-.modalWin {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.modalLose {
+.gameEndModal {
     position: fixed;
     z-index: 200;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    width: 15%;
+}
+.clippyContainer {
+    position: fixed;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    top: 15;
+    right: 15;
+    width: 30vmin;
+    height: 75vh;
+}
+.clippyText {
+    width: 100%;
+    height: 80%;
+}
+.clippyGif {
+    width: 100%;
+    height: 20%;
 }
 .win {
     width: 30%;
