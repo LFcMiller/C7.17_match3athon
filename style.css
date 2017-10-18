@@ -65,13 +65,13 @@ body {
     height: 6vmin;
     width: 100vw;
     box-sizing: border-box;
-    background-color: #f0f0f0;
+    background-color: #c0c0c0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .startButton {
-    background-color: #f0f0f0;
+    background-color: #c0c0c0;
     box-sizing: border-box;
     height: 90%;
     width: 5%;
@@ -96,7 +96,7 @@ body {
     justify-content: space-between;
 }
 .currentScore {
-    background-color: #f0f0f0;
+    background-color: #c0c0c0;
     box-sizing: border-box;
     margin: 0 0 0 1%;
     height: 100%;
@@ -107,7 +107,7 @@ body {
     align-items: center;
 }
 .highScore {
-    background-color: #f0f0f0;
+    background-color: #c0c0c0;
     box-sizing: border-box;
     margin: 0 1% 0 0;
     height: 100%;
