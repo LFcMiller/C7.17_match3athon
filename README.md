@@ -1,5 +1,12 @@
 # Programmer Pop
-Programmer Pop is a Bejeweled Clone written in Javascript, jQuery, HTML5, and CSS3. It's visual style is meant to emulate a classic version of a Windows Desktop, with Clippy representing your guide through the world of Programmer Pop. This game was created over the course of two days during a Hackathon, and was further polished over the course of months after the Hackathon had ended.
+Programmer Pop is a Bejeweled Clone created over the course of two days during a Hackathon, and was further polished over the course of multiple months after the Hackathon had ended. It's visual style is meant to emulate a classic version of a Windows Desktop, with Clippy representing your mascot and guide.
+
+### Built With
+- Javascript
+- jQuery
+- jQuery UI
+- HTML 5
+- CSS 3
 
 ### Features
 - Match icons for various coding languages in groups of 3 to 5, and try to build your score as high as possible.
