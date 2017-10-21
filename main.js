@@ -37,6 +37,18 @@ var view = new View();
 function init(){
     $(".startButton").on("click", gm.startGame.bind(gm));
     $(".gameEndModal").on("click", view.displayGameEndModal);
+    $(".close").on("click", ()=>{
+        $("#gameArea").hide();
+        if(gm.timerID){
+            gm.onTimeOut();
+        }
+    });
+    $(".clippyGif").on("click", ()=>{
+        $(".clippyText").toggle();
+    });
+    $(".clippyText").on("click", ()=>{
+        $(".clippyText").toggle();
+    });
     if(localStorage.highScore === undefined) { //if high score doesn't exist yet, set to 0
         localStorage.highScore = 0;
     }

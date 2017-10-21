@@ -14,6 +14,7 @@ function GameManager(){
      * @param none
      */
     this.startGame = function(){
+        $("#gameArea").show();
         $(".position").off(); //remove click handlers from all tile containers
         data.reset(); //clear all time, score, and tile data
         clearInterval(gm.timerID); //stop timer if still running
@@ -61,9 +62,9 @@ function GameManager(){
         tileHandler.dropTile(); //drop all tiles above matches to fill empty spaces
         if(deleted){
             if(tileHandler.refillEmptySpace()){ //if empty spaces were filled
-                setTimeout(function(){
-                    tileHandler.checkTile(); //check for new matches after 500ms to allow time for user to see matches
-                }, 500);
+                $(".tile").one('webkitAnimationEnd animationend', function() {
+                    tileHandler.checkTile();
+                })
             }
         }
         return deleted; //return flag to show if pieces were deleted
@@ -73,16 +74,13 @@ function GameManager(){
      * @param none
      */
     this.Timer = function(){
-        count();
-        function count(){
-            gm.timerID = setInterval(function(){
+        gm.timerID = setInterval(function(){
             data.timeLeft -= 1;
             view.updateTime();
             if(data.timeLeft <=0){
                 gm.onTimeOut();
             }
         },1000);
-        }
     };
     /**
      * Method to handle timer running out

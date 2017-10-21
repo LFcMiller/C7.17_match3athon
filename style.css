@@ -24,8 +24,16 @@ body {
     height: 5%;
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+}
+.topBar > div {
+    display: flex;
+    align-items: center
+}
+.close {
+    margin: 0 3%;
+    cursor: pointer;
 }
 .phpIcon {
     height: 95%;
@@ -48,6 +56,7 @@ body {
     flex-flow: row wrap;
     justify-content: space-around;
     align-content: space-around;
+    overflow: hidden;
 }
 .position {
     height: 11%;
@@ -58,8 +67,8 @@ body {
 }
 .tile {
     height: 90%;
-    animation-name: fade;
-    transition-duration: 10s;
+    animation-name: drop;
+    animation-duration: 0.75s;
 }
 .bottomBar {
     height: 6vmin;
@@ -154,14 +163,14 @@ body {
     top: 15;
     right: 15;
     width: 30vmin;
-    height: 75vh;
+    height: 80vh;
 }
 .clippyText {
     width: 100%;
     height: 80%;
 }
 .clippyGif {
-    width: 100%;
+    width: 70%;
     height: 20%;
 }
 .win {
@@ -180,7 +189,9 @@ body {
 .noAnimation {
     animation: none;
 }
-@keyframes fade {
-    from {opacity: 0;}
-    to {opacity: 1;}
+@keyframes drop {
+    /* from {opacity: 0;}
+    to {opacity: 1;} */
+    from {transform: translateY(-1000px);}
+    to {transform: translateY(0);}
 }
