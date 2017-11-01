@@ -88,6 +88,7 @@ function GameManager(){
      */
     this.onTimeOut = function(){
         clearInterval(gm.timerID);
+        gm.timerID = null;
         if (data.score > 600) { //if score is greater than win threshhold of 600
             this.onWin();
         } else {
